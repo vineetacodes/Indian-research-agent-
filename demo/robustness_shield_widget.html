@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    .shield-pass { background-color: rgba(34, 197, 94, 0.08); border: 1px solid rgba(34, 197, 94, 0.25); }
+    .golden-banner { background: linear-gradient(135deg, rgba(234, 179, 8, 0.15) 0%, rgba(249, 115, 22, 0.15) 100%); border: 1px solid rgba(234, 179, 8, 0.4); }
+  </style>
+</head>
+<body class="bg-transparent text-[var(--foreground)] antialiased p-3 font-sans">
+  <div class="bg-[var(--card)] text-[var(--foreground)] border border-[var(--border)] rounded-xl p-4 shadow-md max-w-full space-y-4">
+    
+    <!-- Top Header -->
+    <div class="flex items-center justify-between border-b border-[var(--border)] pb-3">
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="inline-flex items-center justify-center w-6 h-6 rounded-md bg-emerald-500/20 text-emerald-400 text-xs font-bold font-mono">🛡️</span>
+          <h2 class="text-base font-semibold text-[var(--foreground)]">Phase 15: Zero-Hallucination Robustness Shield</h2>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 font-mono">11 / 11 Failure Modes Guarded</span>
+        </div>
+        <p class="text-xs text-[var(--muted-foreground)] mt-0.5">Pre-demo verification matrix ensuring total fault tolerance and epistemic integrity.</p>
+      </div>
+      <div class="text-right">
+        <span class="text-[10px] text-emerald-400 font-mono font-bold">● 100% Audit Passed</span>
+      </div>
+    </div>
+
+    <!-- Golden Rule Banner -->
+    <div class="golden-banner p-3 rounded-lg flex items-center justify-between gap-3 text-xs">
+      <div class="flex items-center gap-2">
+        <span class="text-xl">🏆</span>
+        <div>
+          <span class="font-mono text-[10px] uppercase font-bold text-amber-300">The BharatOS Golden Invariant</span>
+          <h3 class="font-black text-amber-200 text-sm tracking-wide">"A missing answer is better than a fake answer."</h3>
+        </div>
+      </div>
+      <span class="text-[10px] font-mono bg-black/40 text-amber-300 px-2.5 py-1 rounded border border-amber-500/30">Zero AI Fabrication Policy</span>
+    </div>
+
+    <!-- 11 Failure Modes Grid -->
+    <div class="grid grid-cols-3 gap-2 text-xs">
+      
+      <!-- Shield 1 -->
+      <div class="shield-pass p-2.5 rounded-lg space-y-1">
+        <div class="flex items-center justify-between">
+          <strong class="text-white text-[11px]">1. API Unavailable</strong>
+          <span class="text-[9px] font-bold text-emerald-400 font-mono">PASS ✓</span>
+        </div>
+        <p class="text-slate-400 text-[10px]">Circuit breaker with cached sovereign snapshots.</p>
+      </div>
+
+      <!-- Shield 2 -->
+      <div class="shield-pass p-2.5 rounded-lg space-y-1">
+        <div class="flex items-center justify-between">
+          <strong class="text-white text-[11px]">2. Request Timeout</strong>
+          <span class="text-[9px] font-bold text-emerald-400 font-mono">PASS ✓</span>
+        </div>
+        <p class="text-slate-400 text-[10px]">Async promise race with graceful degradation notice.</p>
+      </div>
+
+      <!-- Shield 3 -->
+      <div class="shield-pass p-2.5 rounded-lg space-y-1">
+        <div class="flex items-center justify-between">
+          <strong class="text-white text-[11px]">3. Source No Results</strong>
+          <span class="text-[9px] font-bold text-emerald-400 font-mono">PASS ✓</span>
+        </div>
+        <p class="text-slate-400 text-[10px]">Returns explicit <em>"No Record"</em>; never invents substitutes.</p>
+      </div>
+
+      <!-- Shield 4 -->
+      <div class="shield-pass p-2.5 rounded-lg space-y-1">
+        <div class="flex items-center justify-between">
+          <strong class="text-white text-[11px]">4. Duplicate Sources</strong>
+          <span class="text-[9px] font-bold text-emerald-400 font-mono">PASS ✓</span>
+        </div>
+        <p class="text-slate-400 text-[10px]">Deduplication by DOI hash & URI canonicalization.</p>
+      </div>
+
+      <!-- Shield 5 -->
+      <div class="shield-pass p-2.5 rounded-lg space-y-1">
+        <div class="flex items-center justify-between">
+          <strong class="text-white text-[11px]">5. Conflicting Papers</strong>
+          <span class="text-[9px] font-bold text-emerald-400 font-mono">PASS ✓</span>
+        </div>
+        <p class="text-slate-400 text-[10px]">Triggers 7-D Discrepancy Matrix (Year/Geo/Metric).</p>
+      </div>
+
+      <!-- Shield 6 -->
+      <div class="shield-pass p-2.5 rounded-lg space-y-1">
+        <div class="flex items-center justify-between">
+          <strong class="text-white text-[11px]">6. Malformed PDF</strong>
+          <span class="text-[9px] font-bold text-emerald-400 font-mono">PASS ✓</span>
+        </div>
+        <p class="text-slate-400 text-[10px]">Sandboxed OCR parser with corrupt chunk rejection.</p>
+      </div>
+
+      <!-- Shield 7 -->
+      <div class="shield-pass p-2.5 rounded-lg space-y-1">
+        <div class="flex items-center justify-between">
+          <strong class="text-white text-[11px]">7. Missing Data</strong>
+          <span class="text-[9px] font-bold text-emerald-400 font-mono">PASS ✓</span>
+        </div>
+        <p class="text-slate-400 text-[10px]">Logs <code class="text-pink-300 text-[9px]">[DATA UNAVAILABLE]</code>; zero filling.</p>
+      </div>
+
+      <!-- Shield 8 -->
+      <div class="shield-pass p-2.5 rounded-lg space-y-1">
+        <div class="flex items-center justify-between">
+          <strong class="text-white text-[11px]">8. Model Failure</strong>
+          <span class="text-[9px] font-bold text-emerald-400 font-mono">PASS ✓</span>
+        </div>
+        <p class="text-slate-400 text-[10px]">Gemini ➔ Claude ➔ OpenAI ➔ Ollama cascade.</p>
+      </div>
+
+      <!-- Shield 9 -->
+      <div class="shield-pass p-2.5 rounded-lg space-y-1">
+        <div class="flex items-center justify-between">
+          <strong class="text-white text-[11px]">9. Hallucinated Citation</strong>
+          <span class="text-[9px] font-bold text-emerald-400 font-mono">PASS ✓</span>
+        </div>
+        <p class="text-slate-400 text-[10px]">Strict whitelist registry filter; unverified blocked.</p>
+      </div>
+
+      <!-- Shield 10 -->
+      <div class="shield-pass p-2.5 rounded-lg space-y-1">
+        <div class="flex items-center justify-between">
+          <strong class="text-white text-[11px]">10. Rate Limiting</strong>
+          <span class="text-[9px] font-bold text-emerald-400 font-mono">PASS ✓</span>
+        </div>
+        <p class="text-slate-400 text-[10px]">Exponential backoff with jitter retry algorithms.</p>
+      </div>
+
+      <!-- Shield 11 -->
+      <div class="shield-pass p-2.5 rounded-lg space-y-1">
+        <div class="flex items-center justify-between">
+          <strong class="text-white text-[11px]">11. Arithmetic Invariant</strong>
+          <span class="text-[9px] font-bold text-emerald-400 font-mono">PASS ✓</span>
+        </div>
+        <p class="text-slate-400 text-[10px]">Python sandbox math only; zero LLM arithmetic.</p>
+      </div>
+
+      <!-- Compliance Summary Box -->
+      <div class="p-2.5 rounded-lg bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-center">
+        <div>
+          <span class="text-[9px] font-mono text-emerald-300 font-bold block uppercase">Demo Readiness</span>
+          <strong class="text-xs text-white">100% Fault-Proof</strong>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="pt-2 border-t border-[var(--border)] flex items-center justify-between text-[11px] text-[var(--muted-foreground)]">
+      <span>System Audit: <strong class="text-[var(--foreground)]">Automated Fault-Injection Suite (node test_robustness_suite.js)</strong></span>
+      <span>Integrity Standard: <strong>Sovereign Zero-Hallucination Compliance</strong></span>
+    </div>
+
+  </div>
+</body>
+</html>

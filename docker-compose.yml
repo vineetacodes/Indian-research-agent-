@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  bharatos-backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: bharatos_backend
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - NODE_ENV=production
+    env_file:
+      - .env
+    volumes:
+      - ./india_sources:/app/india_sources:ro
+      - ./evaluation:/app/evaluation:ro
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+
+  bharatos-frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: bharatos_frontend
+    restart: unless-stopped
+    ports:
+      - "5173:5173"
+    depends_on:
+      - bharatos-backend
+    environment:
+      - VITE_API_BASE_URL=http://localhost:8080
+
+  bharatos-python-sandbox:
+    image: python:3.11-slim
+    container_name: bharatos_sandbox
+    restart: unless-stopped
+    command: tail -f /dev/null
+    volumes:
+      - ./simulation:/sandbox/simulation:ro
+    cpus: 1.0
+    mem_limit: 512m

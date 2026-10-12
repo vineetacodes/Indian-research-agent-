@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    .badge-direct { background-color: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.35); }
+    .badge-context { background-color: rgba(59, 130, 246, 0.15); color: #3b82f6; border: 1px solid rgba(59, 130, 246, 0.35); }
+    .badge-partial { background-color: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.35); }
+    .badge-notcomp { background-color: rgba(148, 163, 184, 0.15); color: #94a3b8; border: 1px solid rgba(148, 163, 184, 0.35); }
+    
+    .match-tag { background-color: rgba(34, 197, 94, 0.12); color: #22c55e; border: 1px solid rgba(34, 197, 94, 0.25); }
+    .diff-tag { background-color: rgba(239, 68, 68, 0.12); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.25); }
+    .dim-row:hover { background-color: rgba(255, 255, 255, 0.03); }
+  </style>
+</head>
+<body class="bg-transparent text-[var(--foreground)] antialiased p-3 font-sans">
+  <div class="bg-[var(--card)] text-[var(--foreground)] border border-[var(--border)] rounded-xl p-4 shadow-md max-w-full">
+    
+    <!-- Top Header -->
+    <div class="flex items-center justify-between border-b border-[var(--border)] pb-3 mb-3">
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="inline-flex items-center justify-center w-6 h-6 rounded-md bg-purple-500/20 text-purple-400 text-xs font-bold font-mono">7D</span>
+          <h2 class="text-base font-semibold text-[var(--foreground)]">7-Dimensional Epistemic Discrepancy Engine</h2>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 font-mono">BharatOS Sovereign Core</span>
+        </div>
+        <p class="text-xs text-[var(--muted-foreground)] mt-0.5">Automated deep reconciliation beyond surface number differences across 7 structural dimensions.</p>
+      </div>
+
+      <!-- Quick Selector -->
+      <div class="flex items-center gap-1.5 bg-[var(--background)] p-1 rounded-lg border border-[var(--border)]">
+        <span class="text-[11px] text-[var(--muted-foreground)] px-1.5 font-medium">Demo Case:</span>
+        <button onclick="selectCase(0)" id="tab-0" class="text-xs px-2.5 py-1 rounded font-medium bg-[var(--primary)] text-[var(--primary-foreground)] transition">Case 1: Contextual</button>
+        <button onclick="selectCase(1)" id="tab-1" class="text-xs px-2.5 py-1 rounded font-medium text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition">Case 2: Direct Conflict</button>
+        <button onclick="selectCase(2)" id="tab-2" class="text-xs px-2.5 py-1 rounded font-medium text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition">Case 3: Partial</button>
+        <button onclick="selectCase(3)" id="tab-3" class="text-xs px-2.5 py-1 rounded font-medium text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition">Case 4: Incomparable</button>
+      </div>
+    </div>
+
+    <!-- Active Case Display Container -->
+    <div id="case-content" class="space-y-3">
+      <!-- Dynamic Content Rendered Here -->
+    </div>
+
+    <!-- Footer Engine Indicator -->
+    <div class="mt-3 pt-2.5 border-t border-[var(--border)] flex items-center justify-between text-[11px] text-[var(--muted-foreground)]">
+      <span>Evaluated Dimensions: <strong class="text-[var(--foreground)]">Year • Geography • Population • Methodology • Metric • Units • Sample Size</strong></span>
+      <span>Decision Mechanism: <strong>BharatOS Discrepancy Matrix (Falsifiability Logic)</strong></span>
+    </div>
+
+  </div>
+
+  <script>
+    const cases = [
+      {
+        id: 0,
+        title: "Discrepancy: Post-Harvest Perishable Loss Rate in North India",
+        verdict: "CONTEXTUAL DIFFERENCE",
+        badgeClass: "badge-context",
+        consensusRating: "Both Valid (Qualified by Scope)",
+        rootCause: "ASSOCHAM measures uncooled end-to-end logistics from farmgate across interstate mandis (2018 baseline). ICAR-CIPHET isolates on-farm harvest & farmgate cold storage nodes in Haryana (2023 baseline).",
+        reconciledSynthesis: "On-farm cold storage reduces local spoilage to 2.8%–3.5%. However, if secondary transit to Delhi NCR mandis lacks reefer trucks, aggregate supply chain losses reach 18–22%.",
+        sourceA: {
+          name: "ICAR-CIPHET National Post-Harvest Study",
+          tier: "Tier-2 Academic",
+          claim: "Reported Spoilage: 12.4% (Tomato/Potato in Haryana)",
+          url: "https://krishi.icar.gov.in/ciphet-study"
+        },
+        sourceB: {
+          name: "ASSOCHAM National Cold-Chain Study",
+          tier: "Tier-3 Industry Trade",
+          claim: "Reported Spoilage: 24.8% (All-India Perishables)",
+          url: "https://assocham.org/publications"
+        },
+        dimensions: [
+          { name: "1. Publication Year", a: "2023 (Recent Post-KUSUM)", b: "2018 (Pre-KUSUM Baseline)", match: false, note: "5-Year Temporal Shift" },
+          { name: "2. Geography", a: "Haryana (Karnal, Kurukshetra, Sonipat)", b: "All-India Aggregate (Pan-India)", match: false, note: "State vs National Scope" },
+          { name: "3. Target Population", a: "Smallholder horticulture farmers (1-2 Ha)", b: "Wholesale mandi aggregators & traders", match: false, note: "Farmgate vs Commercial Mandi" },
+          { name: "4. Methodology", a: "Empirical field weighment & lab tests", b: "Trader survey questionnaires & estimates", match: false, note: "Measurement vs Questionnaire" },
+          { name: "5. Measured Metric", a: "On-farm & storage spoilage rate", b: "Total Farm-to-Retail supply chain transit loss", match: false, note: "On-Farm Node vs Full Chain" },
+          { name: "6. Standard Units", a: "% by physical weight (kg loss/total kg)", b: "% by financial value (₹ revenue loss)", match: false, note: "Physical Weight vs Fiscal Loss" },
+          { name: "7. Sample Size", a: "N = 1,420 field observations in Haryana", b: "N = 180 wholesale mandi commission agents", match: false, note: "Statistically robust micro-data" }
+        ]
+      },
+      {
+        id: 1,
+        title: "Discrepancy: Daily Energy Consumption for 10 MT Solar Cold Room",
+        verdict: "DIRECT CONFLICT",
+        badgeClass: "badge-direct",
+        consensusRating: "Source A Overrides Source B (Factual Precedence)",
+        rootCause: "Source B relies on legacy fixed-speed AC compressors with low Coefficient of Performance (COP = 1.8) and poor insulation (R-value = 18). Source A utilizes modern BLDC inverter compressors with COP = 3.6 and R-30 polyurethane insulation.",
+        reconciledSynthesis: "Modern 10 MT cold rooms engineered under PMKSY standards consume 32–35 kWh/day, which is 100% sustainable via a 5.0 kW solar array.",
+        sourceA: {
+          name: "HERC & MNRE Technical Test Benchmark",
+          tier: "Tier-1 Sovereign Statutory",
+          claim: "Daily Power Load: 32.5 kWh / day (BLDC Inverter)",
+          url: "https://herc.gov.in"
+        },
+        sourceB: {
+          name: "Diesel Refrigeration Manufacturer Trade Memo",
+          tier: "Tier-4 Web",
+          claim: "Daily Power Load: 58.0 kWh / day (Claims Solar Infeasible)",
+          url: "https://example.com"
+        },
+        dimensions: [
+          { name: "1. Publication Year", a: "2024 (Current FY)", b: "2024 (Current FY)", match: true, note: "Identical Timeframe" },
+          { name: "2. Geography", a: "Haryana Agro-Climatic Zone (Zone II)", b: "Haryana Agro-Climatic Zone (Zone II)", match: true, note: "Identical Geography" },
+          { name: "3. Target Population", a: "10 MT Micro Cold Room (Chamber: 2-4°C)", b: "10 MT Micro Cold Room (Chamber: 2-4°C)", match: true, note: "Identical Capacity & Temp" },
+          { name: "4. Methodology", a: "Calibrated energy meter telemetry log", b: "Theoretical peak-load extrapolation", match: false, note: "Measured vs Theoretical Spec" },
+          { name: "5. Measured Metric", a: "Average Daily Energy Consumption", b: "Average Daily Energy Consumption", match: true, note: "Identical Metric" },
+          { name: "6. Standard Units", a: "kWh / 24-hour operational cycle", b: "kWh / 24-hour operational cycle", match: true, note: "Identical Units" },
+          { name: "7. Sample Size", a: "N = 45 field units in Karnal/Hisar", b: "N = 1 manufacturer bench test", match: false, note: "Source A has statutory N" }
+        ]
+      },
+      {
+        id: 2,
+        title: "Discrepancy: Capital Payback Period for 10-Farmer FPO Cluster",
+        verdict: "PARTIAL CONFLICT",
+        badgeClass: "badge-partial",
+        consensusRating: "Conditional Consensus (Function of Capacity Utilization)",
+        rootCause: "MNRE assumes 80% annual capacity utilization with multi-crop rotation (Potato followed by Tomato/Onion). The PE advisory assumes a conservative 55% single-crop seasonal holding pattern (4 months idle).",
+        reconciledSynthesis: "Payback is 2.8–3.2 years if farmers utilize the cold room across 3 seasonal harvesting cycles, but expands to 4.4 years if restricted to a single crop.",
+        sourceA: {
+          name: "MNRE / Haryana Agri Dept Economic Model",
+          tier: "Tier-1 Sovereign",
+          claim: "Payback Period: 2.8 – 3.2 Years (Multi-Crop)",
+          url: "https://pib.gov.in"
+        },
+        sourceB: {
+          name: "Private Agri-Equity Risk Advisory",
+          tier: "Tier-3 Financial Analyst",
+          claim: "Payback Period: 4.5 – 5.2 Years (Single-Crop)",
+          url: "https://example.com"
+        },
+        dimensions: [
+          { name: "1. Publication Year", a: "2024", b: "2023", match: true, note: "Comparable Timelines" },
+          { name: "2. Geography", a: "Haryana (Karnal / Kurukshetra)", b: "Haryana & Punjab", match: false, note: "Haryana vs Regional Average" },
+          { name: "3. Target Population", a: "10-Farmer FPO Cluster (Multi-Horticulture)", b: "Single-crop smallholders (Potato only)", match: false, note: "Multi-Crop vs Mono-Crop" },
+          { name: "4. Methodology", a: "Cash-flow DCF with 75% KUSUM + 35% PMKSY", b: "Historical balance sheet audits of private units", match: false, note: "Subsidized Model vs Private Unsubsidized" },
+          { name: "5. Measured Metric", a: "Simple & Discounted Payback Period", b: "Simple Payback Period", match: true, note: "Payback in Years" },
+          { name: "6. Standard Units", a: "Years to full CapEx recovery", b: "Years to full CapEx recovery", match: true, note: "Identical Units" },
+          { name: "7. Sample Size", a: "100-farmer simulation model", b: "N = 24 private cold store audits", match: false, note: "Model vs Historical Audit" }
+        ]
+      },
+      {
+        id: 3,
+        title: "Discrepancy: Central Capital Grant vs State Bhavantar Price Deficit",
+        verdict: "NOT COMPARABLE",
+        badgeClass: "badge-notcomp",
+        consensusRating: "Mutually Exclusive Policy Pillars",
+        rootCause: "PMKSY provides an upfront Capital Expenditure (CapEx) asset subsidy. Bhavantar Bharpayee provides an Operational Revenue (OpEx) price-risk insurance floor.",
+        reconciledSynthesis: "These are complementary, non-competing instruments: PMKSY reduces the upfront equipment barrier, while Bhavantar Bharpayee guarantees minimum cash flow during market price crashes.",
+        sourceA: {
+          name: "PMKSY Integrated Cold Chain (MoFPI)",
+          tier: "Tier-1 Sovereign",
+          claim: "Assistance: 35% Capital Grant (Up to ₹10 Cr)",
+          url: "https://mofpi.gov.in"
+        },
+        sourceB: {
+          name: "Bhavantar Bharpayee Yojana (Haryana HSAMB)",
+          tier: "Tier-1 Sovereign",
+          claim: "Assistance: ₹550–₹800/qtl Price Floor DBT",
+          url: "https://agriharyana.gov.in"
+        },
+        dimensions: [
+          { name: "1. Publication Year", a: "2024 Guidelines", b: "2024 Gazette", match: true, note: "Concurrent Active Policies" },
+          { name: "2. Geography", a: "National (General Area: Haryana)", b: "Haryana State Specific", match: false, note: "Central vs State Policy" },
+          { name: "3. Target Population", a: "Infrastructure developers & FPO clusters", b: "Individual horticulture cultivating farmers", match: false, note: "Asset Owner vs Cultivator" },
+          { name: "4. Methodology", a: "Direct grant against eligible machinery bills", b: "DBT payment of Mandi price deficit", match: false, note: "CapEx Reimbursement vs Revenue Deficit" },
+          { name: "5. Measured Metric", a: "Infrastructure Capital Grant Quantum", b: "Per-Quintal Minimum Market Price Floor", match: false, note: "INCOMPATIBLE METRICS" },
+          { name: "6. Standard Units", a: "Percentage of Project Cost (%) / ₹ Lakhs", b: "INR per Quintal (₹ / 100 kg)", match: false, note: "INCOMPATIBLE UNITS" },
+          { name: "7. Sample Size", a: "Statutory Scheme Rules", b: "Statutory Scheme Rules", match: true, note: "Official Gazettes" }
+        ]
+      }
+    ];
+
+    function selectCase(index) {
+      document.querySelectorAll('[id^="tab-"]').forEach((btn, i) => {
+        if (i === index) {
+          btn.className = "text-xs px-2.5 py-1 rounded font-medium bg-[var(--primary)] text-[var(--primary-foreground)] transition";
+        } else {
+          btn.className = "text-xs px-2.5 py-1 rounded font-medium text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition";
+        }
+      });
+      renderCase(cases[index]);
+    }
+
+    function renderCase(c) {
+      const container = document.getElementById('case-content');
+      
+      let dimRows = c.dimensions.map(d => `
+        <tr class="dim-row border-b border-[var(--border)] text-xs">
+          <td class="py-2 px-3 font-semibold text-[var(--foreground)] w-1/4">${d.name}</td>
+          <td class="py-2 px-3 text-[var(--muted-foreground)] w-1/3">${d.a}</td>
+          <td class="py-2 px-3 text-[var(--muted-foreground)] w-1/3">${d.b}</td>
+          <td class="py-2 px-2 text-right">
+            ${d.match 
+              ? '<span class="match-tag text-[10px] font-bold px-1.5 py-0.5 rounded">MATCH</span>' 
+              : '<span class="diff-tag text-[10px] font-bold px-1.5 py-0.5 rounded">DIFF</span>'}
+          </td>
+        </tr>
+      `).join('');
+
+      container.innerHTML = `
+        <!-- Case Header & Verdict -->
+        <div class="p-3 rounded-lg bg-[var(--background)] border border-[var(--border)] flex items-start justify-between gap-3">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="text-[10px] font-mono uppercase px-1.5 py-0.5 rounded bg-purple-500/10 text-purple-400 font-semibold">RECONCILIATION CASE</span>
+              <h3 class="text-sm font-semibold text-[var(--foreground)]">${c.title}</h3>
+            </div>
+            <p class="text-xs text-[var(--muted-foreground)]"><strong class="text-[var(--foreground)]">Root Cause Analysis:</strong> ${c.rootCause}</p>
+          </div>
+          <div class="text-right shrink-0">
+            <span class="${c.badgeClass} text-xs font-black px-3 py-1 rounded-md inline-block uppercase tracking-wider">${c.verdict}</span>
+            <div class="text-[10px] text-[var(--muted-foreground)] mt-1 font-mono">${c.consensusRating}</div>
+          </div>
+        </div>
+
+        <!-- Sources Under Comparison -->
+        <div class="grid grid-cols-2 gap-3">
+          <div class="p-2.5 rounded-lg bg-[var(--background)] border border-[var(--border)] text-xs">
+            <div class="flex items-center justify-between mb-1">
+              <span class="font-bold text-[var(--foreground)]">Source A (Primary Grounding)</span>
+              <span class="text-[10px] px-1.5 py-0.2 rounded bg-blue-500/10 text-blue-400 font-mono">${c.sourceA.tier}</span>
+            </div>
+            <div class="font-medium text-slate-200">${c.sourceA.name}</div>
+            <div class="text-[11px] text-emerald-400 mt-1 font-mono">${c.sourceA.claim}</div>
+          </div>
+
+          <div class="p-2.5 rounded-lg bg-[var(--background)] border border-[var(--border)] text-xs">
+            <div class="flex items-center justify-between mb-1">
+              <span class="font-bold text-[var(--foreground)]">Source B (Divergent Finding)</span>
+              <span class="text-[10px] px-1.5 py-0.2 rounded bg-amber-500/10 text-amber-400 font-mono">${c.sourceB.tier}</span>
+            </div>
+            <div class="font-medium text-slate-200">${c.sourceB.name}</div>
+            <div class="text-[11px] text-amber-400 mt-1 font-mono">${c.sourceB.claim}</div>
+          </div>
+        </div>
+
+        <!-- 7-Dimension Structural Comparison Matrix -->
+        <div class="rounded-lg border border-[var(--border)] overflow-hidden bg-[var(--background)]">
+          <div class="p-2 bg-[var(--card)] border-b border-[var(--border)] font-semibold text-xs flex items-center justify-between">
+            <span>7-Dimension Parametric Alignment Matrix</span>
+            <span class="text-[10px] text-[var(--muted-foreground)] font-normal">Comparing Structural Variables</span>
+          </div>
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="border-b border-[var(--border)] bg-[var(--card)]/40 text-[10px] text-[var(--muted-foreground)] uppercase font-mono">
+                <th class="py-1.5 px-3">Structural Dimension</th>
+                <th class="py-1.5 px-3">Source A Parameter</th>
+                <th class="py-1.5 px-3">Source B Parameter</th>
+                <th class="py-1.5 px-2 text-right">Alignment</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${dimRows}
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Final Reconciled Epistemic Consensus -->
+        <div class="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-xs">
+          <div class="font-bold text-emerald-400 mb-0.5 flex items-center gap-1.5">
+            <span>⚡</span>
+            <span>Synthesized Ground Truth Consensus:</span>
+          </div>
+          <p class="text-slate-300 text-xs leading-relaxed">${c.reconciledSynthesis}</p>
+        </div>
+      `;
+    }
+
+    // Initialize with Case 0
+    selectCase(0);
+  </script>
+</body>
+</html>

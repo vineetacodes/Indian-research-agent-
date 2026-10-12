@@ -1,0 +1,60 @@
+{
+  "expected_sources_registry": {
+    "Q01": [
+      { "source": "data.gov.in", "tier": "Tier-1", "authority": "Open Government Data India" },
+      { "source": "nccd.gov.in", "tier": "Tier-1", "authority": "National Centre for Cold-chain Development / MoFPI" },
+      { "source": "herc.gov.in", "tier": "Tier-1", "authority": "Haryana Electricity Regulatory Commission" },
+      { "source": "krishi.icar.gov.in", "tier": "Tier-2", "authority": "ICAR-CIPHET National Post-Harvest Study" },
+      { "source": "pib.gov.in", "tier": "Tier-1", "authority": "Press Information Bureau / MNRE PM-KUSUM" }
+    ],
+    "Q02": [
+      { "source": "rerc.rajasthan.gov.in", "tier": "Tier-1", "authority": "Rajasthan Electricity Regulatory Commission" },
+      { "source": "mnre.gov.in", "tier": "Tier-1", "authority": "Ministry of New and Renewable Energy" },
+      { "source": "cea.nic.in", "tier": "Tier-1", "authority": "Central Electricity Authority Generation Reports" },
+      { "source": "niwe.res.in", "tier": "Tier-2", "authority": "National Institute of Wind Energy (NIWE)" }
+    ],
+    "Q03": [
+      { "source": "cpcb.nic.in", "tier": "Tier-1", "authority": "Central Pollution Control Board" },
+      { "source": "safar.tropmet.res.in", "tier": "Tier-2", "authority": "System of Air Quality and Weather Forecasting (SAFAR - IITM Pune)" },
+      { "source": "icar.org.in", "tier": "Tier-2", "authority": "ICAR Thermal Remote Sensing Stubble Fire Monitoring" },
+      { "source": "iitk.ac.in", "tier": "Tier-2", "authority": "IIT Kanpur Air Quality Source Apportionment Study" }
+    ],
+    "Q04": [
+      { "source": "nha.gov.in", "tier": "Tier-1", "authority": "National Health Authority (PM-JAY Dashboards)" },
+      { "source": "mohfw.gov.in", "tier": "Tier-1", "authority": "Ministry of Health and Family Welfare" },
+      { "source": "mospi.gov.in", "tier": "Tier-1", "authority": "MOSPI NSSO 75th Round Health Consumption Survey" },
+      { "source": "niti.gov.in", "tier": "Tier-1", "authority": "NITI Aayog State Health Index" }
+    ],
+    "Q05": [
+      { "source": "cgwb.gov.in", "tier": "Tier-1", "authority": "Central Ground Water Board National Aquifer Mapping" },
+      { "source": "agricoop.nic.in", "tier": "Tier-1", "authority": "Ministry of Agriculture PMKSY Micro-Irrigation Portal" },
+      { "source": "mahagov.gov.in", "tier": "Tier-1", "authority": "Maharashtra Dept of Water Resources (Jalyukt Shivar Assessment)" },
+      { "source": "nabard.org", "tier": "Tier-1", "authority": "NABARD State Focus Paper Maharashtra" }
+    ],
+    "Q06": [
+      { "source": "udiseplus.gov.in", "tier": "Tier-1", "authority": "Unified District Information System for Education Plus" },
+      { "source": "education.gov.in", "tier": "Tier-1", "authority": "Ministry of Education PM-SHRI Operational Framework" },
+      { "source": "ncert.nic.in", "tier": "Tier-2", "authority": "NCERT National Achievement Survey (NAS)" }
+    ],
+    "Q07": [
+      { "source": "dfccil.com", "tier": "Tier-1", "authority": "Dedicated Freight Corridor Corporation of India Ltd" },
+      { "source": "indianrailways.gov.in", "tier": "Tier-1", "authority": "Ministry of Railways Freight Statistics" },
+      { "source": "dpiit.gov.in", "tier": "Tier-1", "authority": "DPIIT National Logistics Policy Assessment" }
+    ],
+    "Q08": [
+      { "source": "npci.org.in", "tier": "Tier-1", "authority": "National Payments Corporation of India Transaction Metrics" },
+      { "source": "rbi.org.in", "tier": "Tier-1", "authority": "Reserve Bank of India Banking Ombudsman & DBIE" },
+      { "source": "meity.gov.in", "tier": "Tier-1", "authority": "MeitY Digital Payments Division" }
+    ],
+    "Q09": [
+      { "source": "heavyindustries.gov.in", "tier": "Tier-1", "authority": "Ministry of Heavy Industries (FAME-II / EMPS)" },
+      { "source": "bescom.karnataka.gov.in", "tier": "Tier-1", "authority": "Bangalore Electricity Supply Company Ltd (EV Tariff Orders)" },
+      { "source": "beeindia.gov.in", "tier": "Tier-1", "authority": "Bureau of Energy Efficiency E-Mobility Portal" }
+    ],
+    "Q10": [
+      { "source": "mopng.gov.in", "tier": "Tier-1", "authority": "Ministry of Petroleum and Natural Gas (SATAT Portal)" },
+      { "source": "mohua.gov.in", "tier": "Tier-1", "authority": "Ministry of Housing and Urban Affairs (Swachh Bharat 2.0)" },
+      { "source": "pmc.gov.in", "tier": "Tier-1", "authority": "Pune Municipal Corporation Solid Waste Management Report" }
+    ]
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "expected_claims_registry": {
+    "Q01": [
+      {
+        "claim": "10 MT Solar Cold Storage achieves full payback in 2.8 to 3.5 years when utilizing 75% PM-KUSUM + 35% PMKSY subsidies.",
+        "expected_metrics": { "payback_years": [2.6, 3.5], "farmer_outlay_inr": [80000, 95000] },
+        "expected_conflict": "CONTEXTUAL_DIFFERENCE between farmgate loss vs full transit loss.",
+        "expected_gap": "Lack of real-time temperature telemetry on intermediate transit between farmgate and Azadpur mandi."
+      }
+    ],
+    "Q02": [
+      {
+        "claim": "Solar-wind hybrid microgrids in Western Rajasthan achieve LCOE of ₹3.40–₹3.80/kWh with Capacity Utilization Factor (CUF) exceeding 42%.",
+        "expected_metrics": { "lcoe_inr_kwh": [3.2, 4.0], "cuf_pct": [38.0, 46.0] },
+        "expected_gap": "Dust soiling degradation on bifacial PV panels during summer desert storms."
+      }
+    ],
+    "Q03": [
+      {
+        "claim": "Stubble burning accounts for 25%–40% of Delhi PM2.5 during peak November harvest weeks, but annual baseline is dominated by local vehicular (28%) and road dust (20%) emissions.",
+        "expected_metrics": { "seasonal_stubble_share_peak_pct": [25.0, 42.0], "vehicular_annual_share_pct": [24.0, 32.0] },
+        "expected_conflict": "CONTEXTUAL_DIFFERENCE between seasonal peak episode share vs annual continuous baseline."
+      }
+    ],
+    "Q04": [
+      {
+        "claim": "PM-JAY covers tertiary hospitalization up to ₹5 Lakhs per family, reducing catastrophic out-of-pocket health shocks by 42% among BPL rural beneficiaries in Bihar.",
+        "expected_metrics": { "coverage_limit_inr": 500000, "oope_reduction_pct": [35.0, 50.0] },
+        "expected_gap": "Out-of-pocket expenditure on OPD medicines and diagnostic tests not covered under inpatient PM-JAY package."
+      }
+    ],
+    "Q05": [
+      {
+        "claim": "Drip irrigation under PMKSY Per Drop More Crop saves 40%–48% water and increases crop yield by 26% in water-stressed Marathwada sugarcane/cotton belts.",
+        "expected_metrics": { "water_savings_pct": [35.0, 52.0], "yield_increase_pct": [20.0, 32.0] },
+        "expected_conflict": "PARTIAL_CONFLICT between high initial capital cost for marginal farmers vs 55% state subsidy uptake."
+      }
+    ],
+    "Q06": [
+      {
+        "claim": "PM-SHRI schools in Uttar Pradesh show a 18% improvement in foundational literacy and numeracy (FLN) test scores after deployment of interactive smart boards and digital labs.",
+        "expected_metrics": { "score_delta_pct": [14.0, 22.0] },
+        "expected_gap": "Long-term hardware maintenance and broadband connectivity stability in remote rural gram panchayat schools."
+      }
+    ],
+    "Q07": [
+      {
+        "claim": "Western DFC reduces container transit time from Dadri to JNPT Port from 68 hours to under 24 hours, lowering logistics costs by 15%–18%.",
+        "expected_metrics": { "transit_hours": [20, 26], "speed_kmh": [60, 70], "cost_reduction_pct": [14.0, 20.0] },
+        "expected_conflict": "CONTEXTUAL_DIFFERENCE between dedicated track speeds (65 km/h) vs mixed passenger track speeds (25 km/h)."
+      }
+    ],
+    "Q08": [
+      {
+        "claim": "UPI maintains a fraud-to-sales volume loss rate of under 1.2 basis points (<0.012%), significantly lower than global card network averages (5.8 to 7.2 basis points).",
+        "expected_metrics": { "upi_fraud_bps": [0.8, 1.6], "card_network_fraud_bps": [5.5, 7.5] },
+        "expected_gap": "Social engineering / phishing vectors where users are deceived into authorizing PIN entry vs technical protocol flaws."
+      }
+    ],
+    "Q09": [
+      {
+        "claim": "Electric 3-wheelers achieve Total Cost of Ownership (TCO) parity with CNG within 14–18 months in Bengaluru due to ₹1.10/km operational running cost vs ₹3.40/km for CNG.",
+        "expected_metrics": { "tco_parity_months": [12, 18], "ev_running_cost_per_km": [0.9, 1.3], "cng_running_cost_per_km": [3.0, 3.8] },
+        "expected_gap": "Battery fast-charging turnaround times and commercial driver financing interest rates."
+      }
+    ],
+    "Q10": [
+      {
+        "claim": "Decentralized bio-CNG (CBG) plants in Pune achieve financial break-even in 4.2 years under SATAT assured off-take procurement at ₹46/kg + ₹4 Cr central capital subsidy.",
+        "expected_metrics": { "satat_procurement_price_inr_kg": 46.0, "payback_years": [3.8, 4.6] },
+        "expected_conflict": "PARTIAL_CONFLICT between municipal segregated wet waste quality vs required plant digestor purity."
+      }
+    ]
+  }
+}

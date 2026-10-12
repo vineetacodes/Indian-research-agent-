@@ -1,0 +1,87 @@
+{
+  "benchmark_version": "1.0.0",
+  "evaluation_date": "2026-09-01",
+  "territorial_scope": "India (Sovereign & State Registries)",
+  "questions": [
+    {
+      "id": "Q01",
+      "domain": "Agriculture & Cold Chain",
+      "geography": "Haryana",
+      "question": "Is solar-powered cold storage economically feasible for small farmers in Haryana?",
+      "complexity": "HIGH",
+      "variables_tested": ["CapEx", "PMKSY Grant", "PM-KUSUM Subsidy", "HERC Tariff", "Spoilage Rate"]
+    },
+    {
+      "id": "Q02",
+      "domain": "Renewable Energy",
+      "geography": "Rajasthan",
+      "question": "What is the levelized cost of energy (LCOE) for decentralized solar-wind hybrid microgrids in desert regions of Rajasthan?",
+      "complexity": "HIGH",
+      "variables_tested": ["LCOE INR/kWh", "CUF %", "RERC Tariff", "Battery Storage LCOS"]
+    },
+    {
+      "id": "Q03",
+      "domain": "Delhi Pollution & Environment",
+      "geography": "Delhi NCR & Punjab/Haryana",
+      "question": "What fraction of PM2.5 in Delhi NCR is caused by seasonal stubble burning versus local vehicular emissions?",
+      "complexity": "HIGH",
+      "variables_tested": ["CPCB SAFAR Source Apportionment %", "IIT Kanpur Study", "Wind Trajectory", "Biomass Burning Count"]
+    },
+    {
+      "id": "Q04",
+      "domain": "Indian Healthcare",
+      "geography": "Bihar & Uttar Pradesh",
+      "question": "Has Ayushman Bharat PM-JAY reduced out-of-pocket tertiary hospital expenditures for rural BPL households in Bihar?",
+      "complexity": "HIGH",
+      "variables_tested": ["NHA Claim Rates", "OOPE Reduction %", "Hospital Empanelment Ratio", "NSSO 75th Round"]
+    },
+    {
+      "id": "Q05",
+      "domain": "Water Management & Irrigation",
+      "geography": "Maharashtra (Marathwada)",
+      "question": "What is the impact of groundwater depletion on micro-irrigation (drip/sprinkler) adoption economics in Marathwada Maharashtra?",
+      "complexity": "HIGH",
+      "variables_tested": ["CGWB Water Table Drop m/yr", "PMKSY Per Drop More Crop Subsidy", "Cotton/Sugarcane Water Productivity"]
+    },
+    {
+      "id": "Q06",
+      "domain": "Education & Digital Literacy",
+      "geography": "Uttar Pradesh",
+      "question": "How effective is the PM-SHRI scheme in improving STEM and digital literacy in rural government secondary schools in Uttar Pradesh?",
+      "complexity": "MEDIUM",
+      "variables_tested": ["UDISE+ Infrastructure Index", "NAS Assessment Scores", "Smart Classroom Density", "Dropout Rate Delta"]
+    },
+    {
+      "id": "Q07",
+      "domain": "Public Infrastructure & Logistics",
+      "geography": "Western Corridor (Dadri to JNPT)",
+      "question": "What is the logistics cost reduction and container transit speed gain achieved by the Western Dedicated Freight Corridor (DFC)?",
+      "complexity": "HIGH",
+      "variables_tested": ["DFCCIL Transit Time Reduction", "Logistics Cost % of GDP", "Freight Train Avg Speed (25 -> 65 km/h)", "Diesel vs Electric Traction"]
+    },
+    {
+      "id": "Q08",
+      "domain": "Digital Public Infrastructure & Fintech",
+      "geography": "National (Pan-India)",
+      "question": "What is the systemic fraud loss rate of UPI transactions compared to global card payment networks (Visa/Mastercard)?",
+      "complexity": "MEDIUM",
+      "variables_tested": ["NPCI Fraud Value % (Basis Points)", "RBI Ombudsman Report", "Volume Growth", "Chargeback Dispute Ratio"]
+    },
+    {
+      "id": "Q09",
+      "domain": "Urban Mobility & Electric Vehicles",
+      "geography": "Karnataka (Bengaluru)",
+      "question": "What is the total cost of ownership (TCO) parity point for commercial electric 3-wheelers (auto-rickshaws) compared to CNG in Bengaluru?",
+      "complexity": "HIGH",
+      "variables_tested": ["FAME-II / EMPS Subsidy", "BESCOM EV Tariff INR/kWh", "Battery Degradation Rate", "Daily Opex Delta ₹/km"]
+    },
+    {
+      "id": "Q10",
+      "domain": "Circular Economy & Waste to Energy",
+      "geography": "Maharashtra (Pune)",
+      "question": "Is decentralized bio-CNG (CBG) production economically viable from municipal wet waste under the SATAT scheme in Pune?",
+      "complexity": "HIGH",
+      "variables_tested": ["SATAT Floor Procurement Price ₹46/kg", "MoHUA Solid Waste Baseline", "CapEx Subsidy ₹4 Cr/plant", "Methane Yield m3/ton"]
+    }
+  ]
+}

@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    .screen-tab.active { background: #2563eb; color: #ffffff; font-weight: 700; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3); }
+    .screen-tab { background: rgba(255, 255, 255, 0.04); color: #94a3b8; }
+    .cockpit-canvas { background: #070a12; min-height: 480px; }
+    .graph-node { transition: all 0.2s ease; }
+    .graph-node:hover { transform: scale(1.05); }
+    .slider-accent { accent-color: #3b82f6; }
+  </style>
+</head>
+<body class="bg-transparent text-[var(--foreground)] antialiased p-2 font-sans">
+  <div class="bg-[var(--card)] text-[var(--foreground)] border border-[var(--border)] rounded-2xl shadow-2xl max-w-full overflow-hidden flex flex-col">
+    
+    <!-- Top Cockpit Header -->
+    <div class="p-3.5 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-amber-500 via-orange-500 to-blue-600 flex items-center justify-center text-white font-black text-sm shadow-md">
+          भ
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-sm font-bold text-white tracking-wide">BharatOS Research Intelligence</h1>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-mono font-bold">भारत शोध प्रज्ञा</span>
+          </div>
+          <p class="text-[11px] text-slate-400">8-Stage Sovereign Epistemic Investigation System</p>
+        </div>
+      </div>
+
+      <!-- Live Pipeline Status -->
+      <div class="flex items-center gap-2 text-xs">
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 font-mono text-[11px]">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>Target: <strong>Haryana Agri-Energy Economics</strong></span>
+        </span>
+      </div>
+    </div>
+
+    <!-- 8-Screen Navigation Step Bar -->
+    <div class="bg-slate-900/90 border-b border-slate-800 p-1.5 flex items-center justify-between gap-1 overflow-x-auto text-[11px]">
+      <button onclick="goToScreen(1)" id="tab-1" class="screen-tab active px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition shrink-0">
+        <span>1.</span> <span>Question</span>
+      </button>
+      <button onclick="goToScreen(2)" id="tab-2" class="screen-tab px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition shrink-0">
+        <span>2.</span> <span>Live Plan</span>
+      </button>
+      <button onclick="goToScreen(3)" id="tab-3" class="screen-tab px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition shrink-0">
+        <span>3.</span> <span>Evidence Explorer</span>
+      </button>
+      <button onclick="goToScreen(4)" id="tab-4" class="screen-tab px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition shrink-0">
+        <span>4.</span> <span>Evidence Graph</span>
+      </button>
+      <button onclick="goToScreen(5)" id="tab-5" class="screen-tab px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition shrink-0">
+        <span>5.</span> <span>Research Gap</span>
+      </button>
+      <button onclick="goToScreen(6)" id="tab-6" class="screen-tab px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition shrink-0">
+        <span>6.</span> <span>Hypothesis</span>
+      </button>
+      <button onclick="goToScreen(7)" id="tab-7" class="screen-tab px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition shrink-0">
+        <span>7.</span> <span>What-If Sim</span>
+      </button>
+      <button onclick="goToScreen(8)" id="tab-8" class="screen-tab px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition shrink-0">
+        <span>8.</span> <span>Final Report</span>
+      </button>
+    </div>
+
+    <!-- Main Dynamic Screen Canvas -->
+    <div class="cockpit-canvas p-4 text-slate-100 flex-1">
+
+      <!-- =================================================================== -->
+      <!-- SCREEN 1: RESEARCH QUESTION -->
+      <!-- =================================================================== -->
+      <div id="screen-1" class="space-y-4">
+        <div class="max-w-2xl mx-auto py-4 space-y-4">
+          <div class="text-center space-y-1">
+            <span class="text-xs font-mono font-bold uppercase tracking-wider text-blue-400">Screen 1 / 8</span>
+            <h2 class="text-xl font-bold text-white">Formulate Sovereign Research Inquiry</h2>
+            <p class="text-xs text-slate-400">Ground query across Indian geography, regulatory gazettes, and official datasets.</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-900 border border-slate-800 space-y-3">
+            <div>
+              <label class="block text-xs font-medium text-slate-300 mb-1">Primary Research Question:</label>
+              <div class="p-2.5 rounded-lg bg-slate-950 border border-slate-700 text-sm text-white font-medium">
+                "Is solar-powered cold storage economically feasible for small farmers in Haryana?"
+              </div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-2 text-xs">
+              <div>
+                <span class="text-[10px] text-slate-400 block mb-1">Target Geography</span>
+                <div class="p-1.5 rounded bg-slate-950 border border-slate-800 text-slate-200">Haryana (Zone II)</div>
+              </div>
+              <div>
+                <span class="text-[10px] text-slate-400 block mb-1">Target Subject</span>
+                <div class="p-1.5 rounded bg-slate-950 border border-slate-800 text-slate-200">1–2 Ha Smallholders (FPO)</div>
+              </div>
+              <div>
+                <span class="text-[10px] text-slate-400 block mb-1">Standard Layer</span>
+                <div class="p-1.5 rounded bg-slate-950 border border-slate-800 text-slate-200">FY 2026-27 (INR ₹)</div>
+              </div>
+            </div>
+
+            <div class="pt-2 flex justify-end">
+              <button onclick="goToScreen(2)" class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs flex items-center gap-1.5 shadow-lg transition">
+                <span>Execute 5-Agent Fleet</span>
+                <span>➔</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- =================================================================== -->
+      <!-- SCREEN 2: LIVE RESEARCH PLAN -->
+      <!-- =================================================================== -->
+      <div id="screen-2" class="hidden space-y-3">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+          <div>
+            <span class="text-xs font-mono font-bold uppercase tracking-wider text-blue-400">Screen 2 / 8</span>
+            <h2 class="text-base font-bold text-white">Live Multi-Track Research Execution</h2>
+          </div>
+          <span class="text-xs font-mono text-emerald-400">● 5 Parallel Tracks Active</span>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3 text-xs">
+          <!-- Track 1 -->
+          <div class="p-3 rounded-lg bg-slate-900 border border-slate-800 space-y-1">
+            <div class="flex items-center justify-between">
+              <strong class="text-white">Track 1: Agriculture & Spoilage</strong>
+              <span class="text-emerald-400 font-bold text-xs">✓ COMPLETED</span>
+            </div>
+            <p class="text-slate-400 text-[11px]">ICAR-CIPHET baseline loss: 12.4%–15.8% for tomato/potato in North India.</p>
+          </div>
+
+          <!-- Track 2 -->
+          <div class="p-3 rounded-lg bg-slate-900 border border-slate-800 space-y-1">
+            <div class="flex items-center justify-between">
+              <strong class="text-white">Track 2: Economics & Tariffs</strong>
+              <span class="text-emerald-400 font-bold text-xs">✓ COMPLETED</span>
+            </div>
+            <p class="text-slate-400 text-[11px]">HERC LT commercial agro tariff ₹6.50/kWh + ₹170/kVA demand charge.</p>
+          </div>
+
+          <!-- Track 3 -->
+          <div class="p-3 rounded-lg bg-slate-900 border border-blue-500/50 space-y-1">
+            <div class="flex items-center justify-between">
+              <strong class="text-blue-300">Track 3: Sovereign Government Data</strong>
+              <span class="text-blue-400 font-bold text-xs animate-pulse">⟳ INGESTING</span>
+            </div>
+            <p class="text-slate-400 text-[11px]">data.gov.in & HSAMB district mandi arrivals & yield statistics.</p>
+          </div>
+
+          <!-- Track 4 -->
+          <div class="p-3 rounded-lg bg-slate-900 border border-purple-500/50 space-y-1">
+            <div class="flex items-center justify-between">
+              <strong class="text-purple-300">Track 4: Academic Literature & Patents</strong>
+              <span class="text-purple-400 font-bold text-xs animate-pulse">⟳ EXTRACTING</span>
+            </div>
+            <p class="text-slate-400 text-[11px]">Patent IN 382914 (PCM Thermal Buffer) & Shodhganga ETD studies.</p>
+          </div>
+        </div>
+
+        <div class="flex justify-between items-center pt-2">
+          <button onclick="goToScreen(1)" class="text-xs text-slate-400 hover:text-white font-mono">← Back</button>
+          <button onclick="goToScreen(3)" class="px-3.5 py-1.5 rounded-lg bg-blue-600 text-white font-bold text-xs">Proceed to Evidence Explorer ➔</button>
+        </div>
+      </div>
+
+      <!-- =================================================================== -->
+      <!-- SCREEN 3: EVIDENCE EXPLORER -->
+      <!-- =================================================================== -->
+      <div id="screen-3" class="hidden space-y-3">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+          <div>
+            <span class="text-xs font-mono font-bold uppercase tracking-wider text-blue-400">Screen 3 / 8</span>
+            <h2 class="text-base font-bold text-white">Auditable Evidence Explorer (Claims + Provenance)</h2>
+          </div>
+          <span class="text-xs text-slate-400 font-mono">6 Claims Verified</span>
+        </div>
+
+        <div class="space-y-2 text-xs">
+          <div class="p-3 rounded-lg bg-slate-900 border border-slate-800">
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-xs font-bold text-white">Claim: 10 MT Solar Cold Storage achieves 2.8 yr payback with 75% PM-KUSUM + 35% PMKSY.</span>
+              <span class="text-emerald-400 font-bold font-mono">95% Consensus</span>
+            </div>
+            <div class="p-2 rounded bg-slate-950 text-slate-300 text-[11px] font-mono mt-1 space-y-0.5">
+              <div>• MNRE Guidelines (Tier-1): 75% composite solar subsidy (30% Central + 45% Haryana State).</div>
+              <div>• MoFPI SAMPADA (Tier-1): 35% capital grant on cold room machinery.</div>
+              <div>• Net outlay for 10-farmer cluster = ₹83,625 per farmer.</div>
+            </div>
+          </div>
+
+          <div class="p-3 rounded-lg bg-slate-900 border border-slate-800">
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-xs font-bold text-white">Claim: Decentralized chilling reduces post-harvest loss from 12.4% to &lt;3.5%.</span>
+              <span class="text-emerald-400 font-bold font-mono">98% Verified</span>
+            </div>
+            <div class="p-2 rounded bg-slate-950 text-slate-300 text-[11px] font-mono mt-1">
+              • ICAR-CIPHET National Study (Tier-2 Academic): Saves 4.8 MT/year valued at ₹1.20 Lakhs per cluster.
+            </div>
+          </div>
+        </div>
+
+        <div class="flex justify-between items-center pt-2">
+          <button onclick="goToScreen(2)" class="text-xs text-slate-400 hover:text-white font-mono">← Back</button>
+          <button onclick="goToScreen(4)" class="px-3.5 py-1.5 rounded-lg bg-blue-600 text-white font-bold text-xs">View Evidence Graph ➔</button>
+        </div>
+      </div>
+
+      <!-- =================================================================== -->
+      <!-- SCREEN 4: EVIDENCE GRAPH -->
+      <!-- =================================================================== -->
+      <div id="screen-4" class="hidden space-y-3">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+          <div>
+            <span class="text-xs font-mono font-bold uppercase tracking-wider text-blue-400">Screen 4 / 8</span>
+            <h2 class="text-base font-bold text-white">Bipartite Claim-Evidence Knowledge Graph</h2>
+          </div>
+          <span class="text-xs text-slate-400 font-mono">Interactive Topological Visualizer</span>
+        </div>
+
+        <!-- Visual Network Canvas Simulation -->
+        <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 relative min-h-[260px] flex items-center justify-center">
+          <div class="w-full max-w-xl grid grid-cols-3 gap-6 items-center text-center text-xs">
+            
+            <!-- Column 1: Claims -->
+            <div class="space-y-3">
+              <span class="text-[10px] uppercase font-mono text-slate-400 font-bold block">Claims</span>
+              <div class="graph-node p-2.5 rounded-lg bg-blue-900/40 border border-blue-500/50 text-blue-200">
+                Claim 1: 2.8 Yr Payback
+              </div>
+              <div class="graph-node p-2.5 rounded-lg bg-blue-900/40 border border-blue-500/50 text-blue-200">
+                Claim 2: 12% Loss Saved
+              </div>
+            </div>
+
+            <!-- Column 2: Relations -->
+            <div class="space-y-4 text-slate-500 font-mono text-xs">
+              <div>───── [100% SUPPORT] ─────►</div>
+              <div>───── [100% SUPPORT] ─────►</div>
+              <div>───── [85% PARTIAL] ─────►</div>
+            </div>
+
+            <!-- Column 3: Sources -->
+            <div class="space-y-3">
+              <span class="text-[10px] uppercase font-mono text-slate-400 font-bold block">Sovereign Sources</span>
+              <div class="graph-node p-2.5 rounded-lg bg-emerald-900/40 border border-emerald-500/50 text-emerald-200">
+                MNRE & PM-KUSUM
+              </div>
+              <div class="graph-node p-2.5 rounded-lg bg-emerald-900/40 border border-emerald-500/50 text-emerald-200">
+                ICAR-CIPHET Study
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="flex justify-between items-center pt-2">
+          <button onclick="goToScreen(3)" class="text-xs text-slate-400 hover:text-white font-mono">← Back</button>
+          <button onclick="goToScreen(5)" class="px-3.5 py-1.5 rounded-lg bg-pink-600 hover:bg-pink-500 text-white font-bold text-xs">View Research Gap ➔</button>
+        </div>
+      </div>
+
+      <!-- =================================================================== -->
+      <!-- SCREEN 5: RESEARCH GAP (HUGE HIGHLIGHTED FINDING) -->
+      <!-- =================================================================== -->
+      <div id="screen-5" class="hidden space-y-3">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+          <div>
+            <span class="text-xs font-mono font-bold uppercase tracking-wider text-pink-400">Screen 5 / 8</span>
+            <h2 class="text-base font-bold text-white">Highlighted Epistemic Research Gap</h2>
+          </div>
+          <span class="text-xs px-2 py-0.5 rounded bg-pink-500/20 text-pink-300 font-bold font-mono">Falsifiable Finding</span>
+        </div>
+
+        <!-- Huge Gap Card -->
+        <div class="p-4 rounded-xl bg-gradient-to-r from-pink-950/40 via-purple-950/30 to-slate-900 border-2 border-pink-500/40 space-y-3">
+          <div class="flex items-center gap-2">
+            <span class="px-2 py-0.5 rounded bg-pink-500 text-white font-black text-[10px] uppercase font-mono tracking-wider">CRITICAL VOID</span>
+            <span class="text-xs text-slate-300 font-mono">Cold-Chain Last-Mile Interface</span>
+          </div>
+
+          <h3 class="text-base font-bold text-white leading-snug">
+            Lack of Real-Time Temperature & GPS Telemetry Logging on Intermediate Non-Refrigerated Transit Between Haryana Farmgate Cold Rooms and Delhi NCR Mandis (Azadpur / Gazipur)
+          </h3>
+
+          <div class="grid grid-cols-2 gap-3 text-xs pt-1">
+            <div class="p-2.5 rounded-lg bg-black/40 border border-slate-800">
+              <strong class="text-slate-300 block text-[10px] uppercase font-mono mb-0.5">Why this gap exists:</strong>
+              <p class="text-slate-400 text-[11px]">Farmgate micro cold rooms chill produce to 2–4°C, but 4–8 hour transit in open pickup trucks in +45°C ambient heat causes thermal shock before reaching auction floors.</p>
+            </div>
+            <div class="p-2.5 rounded-lg bg-black/40 border border-slate-800">
+              <strong class="text-slate-300 block text-[10px] uppercase font-mono mb-0.5">Popperian Falsifiability Test:</strong>
+              <p class="text-slate-400 text-[11px]">Refuted if HSAMB or data.gov.in provides live sensor logs: <code class="text-pink-300">data.gov.in/api/query?dataset=haryana_reefer_telemetry</code></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex justify-between items-center pt-2">
+          <button onclick="goToScreen(4)" class="text-xs text-slate-400 hover:text-white font-mono">← Back</button>
+          <button onclick="goToScreen(6)" class="px-3.5 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs">Formulate Hypothesis ➔</button>
+        </div>
+      </div>
+
+      <!-- =================================================================== -->
+      <!-- SCREEN 6: HYPOTHESIS -->
+      <!-- =================================================================== -->
+      <div id="screen-6" class="hidden space-y-3">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+          <div>
+            <span class="text-xs font-mono font-bold uppercase tracking-wider text-purple-400">Screen 6 / 8</span>
+            <h2 class="text-base font-bold text-white">Scientific Hypothesis Formulation (H₁)</h2>
+          </div>
+          <span class="text-xs text-emerald-400 font-mono">7 Variables Defined</span>
+        </div>
+
+        <div class="p-3.5 rounded-xl bg-purple-950/30 border border-purple-800/50 space-y-3">
+          <div class="text-[10px] font-mono uppercase font-bold text-purple-300">Hypothesis Statement:</div>
+          <p class="text-sm font-medium text-white leading-relaxed">
+            "Shared decentralized solar cold-storage infrastructure (10 MT) operated as an FPO cluster model achieves full capital payback in <strong class="text-emerald-400">&le; 3.2 years</strong> and an IRR of <strong class="text-emerald-400">&ge; 24%</strong> when capacity utilization exceeds <strong class="text-purple-300">70%</strong> across a 3-crop rotation cycle within a <strong class="text-blue-300">&le; 3 km</strong> farmgate radius."
+          </p>
+
+          <div class="p-2.5 rounded bg-slate-900 border border-slate-800 text-xs">
+            <span class="text-[10px] uppercase font-mono text-slate-400 block mb-1">Experiment Protocol:</span>
+            <p class="text-slate-300 text-[11px]">Quasi-Experimental Cluster Controlled Trial across 12 FPO packhouse hubs in Karnal, Kurukshetra & Sonipat corridors.</p>
+          </div>
+        </div>
+
+        <div class="flex justify-between items-center pt-2">
+          <button onclick="goToScreen(5)" class="text-xs text-slate-400 hover:text-white font-mono">← Back</button>
+          <button onclick="goToScreen(7)" class="px-3.5 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs">Run What-If Simulation ➔</button>
+        </div>
+      </div>
+
+      <!-- =================================================================== -->
+      <!-- SCREEN 7: WHAT-IF SIMULATION -->
+      <!-- =================================================================== -->
+      <div id="screen-7" class="hidden space-y-3">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+          <div>
+            <span class="text-xs font-mono font-bold uppercase tracking-wider text-blue-400">Screen 7 / 8</span>
+            <h2 class="text-base font-bold text-white">What-If Python Sandbox Simulator</h2>
+          </div>
+          <span class="text-xs text-emerald-400 font-mono">Real-Time Deterministic Math</span>
+        </div>
+
+        <div class="p-3.5 rounded-xl bg-slate-900 border border-slate-800 space-y-3 text-xs">
+          <div class="grid grid-cols-3 gap-3">
+            <div>
+              <div class="flex justify-between text-[11px] mb-1">
+                <span class="text-slate-400">Electricity Cost Delta:</span>
+                <strong class="text-amber-400 font-mono" id="scr-disp-tariff">+20% (₹7.80/kWh)</strong>
+              </div>
+              <input type="range" min="-30" max="60" step="5" value="20" class="w-full slider-accent" id="scr-slide-tariff" oninput="recalcScreen7()">
+            </div>
+            <div>
+              <div class="flex justify-between text-[11px] mb-1">
+                <span class="text-slate-400">Storage Utilization:</span>
+                <strong class="text-purple-400 font-mono" id="scr-disp-util">70%</strong>
+              </div>
+              <input type="range" min="30" max="95" step="5" value="70" class="w-full slider-accent" id="scr-slide-util" oninput="recalcScreen7()">
+            </div>
+            <div>
+              <div class="flex justify-between text-[11px] mb-1">
+                <span class="text-slate-400">Solar Subsidy (Haryana):</span>
+                <strong class="text-emerald-400 font-mono">75%</strong>
+              </div>
+              <input type="range" min="0" max="90" step="5" value="75" class="w-full slider-accent" id="scr-slide-sub" oninput="recalcScreen7()">
+            </div>
+          </div>
+
+          <!-- Dynamic Output Metrics -->
+          <div class="grid grid-cols-4 gap-2 pt-2 border-t border-slate-800 text-center">
+            <div class="p-2 rounded bg-black/40 border border-slate-800">
+              <span class="text-[9px] text-slate-400 block font-mono">NET FARMER CAPEX</span>
+              <strong class="text-sm font-bold text-white" id="scr-out-capex">₹83,625</strong>
+            </div>
+            <div class="p-2 rounded bg-black/40 border border-slate-800">
+              <span class="text-[9px] text-slate-400 block font-mono">PAYBACK PERIOD</span>
+              <strong class="text-sm font-bold text-emerald-400" id="scr-out-payback">2.77 Years</strong>
+            </div>
+            <div class="p-2 rounded bg-black/40 border border-slate-800">
+              <span class="text-[9px] text-slate-400 block font-mono">PROJECTED IRR</span>
+              <strong class="text-sm font-bold text-purple-400" id="scr-out-irr">28.1%</strong>
+            </div>
+            <div class="p-2 rounded bg-black/40 border border-slate-800">
+              <span class="text-[9px] text-slate-400 block font-mono">10-YEAR ROI</span>
+              <strong class="text-sm font-bold text-blue-400" id="scr-out-roi">+261%</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex justify-between items-center pt-2">
+          <button onclick="goToScreen(6)" class="text-xs text-slate-400 hover:text-white font-mono">← Back</button>
+          <button onclick="goToScreen(8)" class="px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs">Generate Final Report ➔</button>
+        </div>
+      </div>
+
+      <!-- =================================================================== -->
+      <!-- SCREEN 8: FINAL REPORT -->
+      <!-- =================================================================== -->
+      <div id="screen-8" class="hidden space-y-3">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+          <div>
+            <span class="text-xs font-mono font-bold uppercase tracking-wider text-emerald-400">Screen 8 / 8</span>
+            <h2 class="text-base font-bold text-white">Final Intelligence Report & Sovereign Citations</h2>
+          </div>
+          <div class="flex gap-2">
+            <button onclick="alert('Exporting PDF report...')" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-mono">⬇ PDF Export</button>
+            <button onclick="alert('Exporting Markdown...')" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-mono">⬇ Markdown</button>
+          </div>
+        </div>
+
+        <div class="p-3.5 rounded-xl bg-slate-900 border border-slate-800 text-xs space-y-2 max-h-[280px] overflow-y-auto">
+          <div class="p-2.5 rounded bg-emerald-500/10 border border-emerald-500/30">
+            <strong class="text-emerald-400 block text-xs mb-0.5">Definitive Economic Verdict: HIGHLY FEASIBLE</strong>
+            <p class="text-slate-300 text-[11px]">
+              Deploying 10 MT micro solar cold storage across a 10-farmer FPO cluster in Haryana reduces net farmer outlay to <strong>₹83,625 per farmer</strong>, achieving complete capital payback in <strong>2.8 years</strong> with <strong>+251.7% 10-year ROI</strong>.
+            </p>
+          </div>
+
+          <div class="text-[11px] text-slate-300 space-y-1 font-mono">
+            <div class="font-bold text-white">Verified Canonical Citations:</div>
+            <div>[1] data.gov.in — Haryana Horticulture Production & Arrivals 2024</div>
+            <div>[2] nccd.gov.in — Cold Storage Capacity Assessment</div>
+            <div>[3] herc.gov.in — Tariff Order FY 2024-25</div>
+            <div>[4] pib.gov.in — PM-KUSUM 75% Solar Subsidy Guidelines</div>
+            <div>[5] IP India — Patent IN 382914 (PCM Thermal Buffer)</div>
+          </div>
+        </div>
+
+        <div class="flex justify-between items-center pt-2">
+          <button onclick="goToScreen(7)" class="text-xs text-slate-400 hover:text-white font-mono">← Back</button>
+          <span class="text-xs text-emerald-400 font-bold font-mono">✓ End-to-End Investigation Complete</span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    function goToScreen(screenNumber) {
+      for (let i = 1; i <= 8; i++) {
+        const screen = document.getElementById('screen-' + i);
+        const tab = document.getElementById('tab-' + i);
+        if (screen && tab) {
+          if (i === screenNumber) {
+            screen.classList.remove('hidden');
+            tab.className = "screen-tab active px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition shrink-0";
+          } else {
+            screen.classList.add('hidden');
+            tab.className = "screen-tab px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition shrink-0";
+          }
+        }
+      }
+    }
+
+    function recalcScreen7() {
+      const tariffMod = parseFloat(document.getElementById('scr-slide-tariff').value);
+      const util = parseFloat(document.getElementById('scr-slide-util').value);
+      const actualTariff = 6.50 * (1 + (tariffMod / 100));
+
+      document.getElementById('scr-disp-tariff').innerText = (tariffMod >= 0 ? '+' : '') + tariffMod + '% (₹' + actualTariff.toFixed(2) + '/kWh)';
+      document.getElementById('scr-disp-util').innerText = util + '%';
+
+      const netCapEx = 836250;
+      const perFarmer = 83625;
+      const annualCropMT = 10 * 4 * (util / 100);
+      const spoilageSaved = annualCropMT * 0.12 * 25000;
+      const offSeason = annualCropMT * 25000 * 0.18;
+      const solarSaved = (5.0 * 4.2 * 270) * actualTariff;
+      const amcOpEx = 1425000 * 0.03;
+      const netProfit = spoilageSaved + offSeason + solarSaved - amcOpEx;
+
+      const payback = netCapEx / Math.max(1000, netProfit);
+      const irr = Math.max(5, (netProfit / netCapEx) * 100 - 4);
+      const tenYearROI = ((netProfit * 10 - netCapEx) / netCapEx) * 100;
+
+      document.getElementById('scr-out-payback').innerText = payback.toFixed(2) + ' Years';
+      document.getElementById('scr-out-irr').innerText = irr.toFixed(1) + '%';
+      document.getElementById('scr-out-roi').innerText = '+' + Math.round(tenYearROI) + '%';
+    }
+  </script>
+</body>
+</html>

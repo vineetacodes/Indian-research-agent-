@@ -1,0 +1,927 @@
+# ==============================================================================
+# BHARAT RESEARCH INTELLIGENCE AGENT (BRIA) — INDIA SOURCE REGISTRY
+# ==============================================================================
+# Codename: भारत शोध प्रज्ञा (Bharat Shodh Pragya)
+# Schema Version: 1.0.0
+# Last Updated: 2026-09-01T13:26:00+05:30
+# Maintainer: Lead Software Architect, BRIA Sovereign Intelligence Division
+#
+# OPERATIONAL INVARIANTS:
+# 1. Zero Data Fabrication: Under no circumstances shall synthetic or imaginary data
+#    be generated for unavailable records or inaccessible endpoints.
+# 2. Strict Legal & Technical Compliance: Always observe robots.txt, terms of service,
+#    authentication policies, and rate limits. Never attempt bypass or credential spoofing.
+# 3. Provenance Primacy: Every extracted data point must carry full provenance metadata
+#    (Source ID, Canonical URL, Extraction Timestamp IST, and Credibility Tier).
+# ==============================================================================
+
+version: "1.0.0"
+registry_metadata:
+  name: "Bharat Sovereign & Scholarly Source Registry"
+  description: "Deterministic registry of Tier 1-4 data sources for sovereign and scholarly research in India"
+  default_timezone: "Asia/Kolkata"
+  default_currency: "INR"
+  user_agent: "BharatResearchAgent/1.0 (+https://bria.gov.in/bot; contact: tech@bria.gov.in)"
+
+# ==============================================================================
+# TIER DEFINITIONS
+# ==============================================================================
+tiers:
+  tier_1:
+    label: "Sovereign Indian Government & National Data Layer"
+    description: "Official statutory bodies, central banks, ministries, space/scientific councils, and judicial archives"
+    credibility_weight: 1.00
+    mandatory_verification: true
+  tier_2:
+    label: "Indian Academic, Scientific & Institutional Repositories"
+    description: "Peer-reviewed national repositories, thesis archives, institutional digital libraries, and CSIR journals"
+    credibility_weight: 0.90
+    mandatory_verification: true
+  tier_3:
+    label: "Global Scholarly, Bibliographic & Scientific Indices"
+    description: "International indexing services, open pre-print repositories, and biomedical citation databases"
+    credibility_weight: 0.80
+    mandatory_verification: false
+  tier_4:
+    label: "General Web & Fallback Discovery Layer"
+    description: "Verified news, general search engines, and web crawling endpoints"
+    credibility_weight: 0.60
+    mandatory_verification: false
+
+# ==============================================================================
+# REGISTERED SOURCES
+# ==============================================================================
+sources:
+
+  # ----------------------------------------------------------------------------
+  # TIER 1: SOVEREIGN INDIAN GOVERNMENT & NATIONAL DATA LAYER
+  # ----------------------------------------------------------------------------
+
+  - source_id: "in-gov-ogd-datagov"
+    name: "Open Government Data (OGD) Platform India"
+    category: "sovereign_open_data"
+    priority: "Tier-1"
+    jurisdiction: "IN_CENTRAL"
+    governing_body: "National Informatics Centre (NIC) / Ministry of Electronics and Information Technology (MeitY)"
+    base_url: "https://data.gov.in"
+    api_endpoint: "https://api.data.gov.in/resource/"
+    catalog_discovery_endpoint: "https://api.data.gov.in/catalog/search"
+    access_method: "REST_API"
+    api_available: true
+    authentication_required: true
+    auth_type: "API_KEY_QUERY_PARAM"
+    auth_env_var: "OGD_INDIA_API_KEY"
+    search_supported: true
+    document_supported: true
+    supported_formats: ["JSON", "CSV", "XML"]
+    rate_limit:
+      requests_per_minute: 100
+      requests_per_day: 5000
+      burst_limit: 10
+      concurrency_ceiling: 4
+      retry_policy:
+        max_retries: 3
+        backoff_multiplier: 2.0
+        initial_interval_ms: 1000
+    provenance_requirements:
+      citation_format: "OGD Platform India, Resource ID: {resource_id}, Published by {ministry_name}, Accessed {timestamp_ist}"
+      attribution_url: "https://data.gov.in/node/{resource_id}"
+      licensing_terms: "National Data Sharing and Accessibility Policy (NDSAP) - Government of India"
+      mandatory_disclaimer: "Data sourced from Open Government Data (OGD) Platform India under NDSAP."
+    discovery_protocol:
+      method: "CATALOG_API_SEARCH"
+      query_param: "title"
+      filter_params: ["ministry", "sector", "frequency"]
+
+  - source_id: "in-fin-rbi-dbie"
+    name: "Reserve Bank of India — Database on Indian Economy (DBIE)"
+    category: "central_banking_macroeconomics"
+    priority: "Tier-1"
+    jurisdiction: "IN_CENTRAL"
+    governing_body: "Reserve Bank of India (RBI)"
+    base_url: "https://dbie.rbi.org.in"
+    api_endpoint: "https://dbie.rbi.org.in/DBIE/dbie.rbi?site=statistics"
+    access_method: "REST_API_AND_STRUCTURED_DOWNLOAD"
+    api_available: true
+    authentication_required: false
+    auth_type: "NONE"
+    search_supported: true
+    document_supported: true
+    supported_formats: ["XLSX", "CSV", "JSON", "PDF"]
+    rate_limit:
+      requests_per_minute: 30
+      burst_limit: 5
+      concurrency_ceiling: 2
+      retry_policy:
+        max_retries: 4
+        backoff_multiplier: 2.5
+        initial_interval_ms: 1500
+    provenance_requirements:
+      citation_format: "Reserve Bank of India, DBIE Table: {table_code} ({table_title}), Frequency: {frequency}, Series Extracted: {timestamp_ist}"
+      attribution_url: "https://dbie.rbi.org.in"
+      licensing_terms: "RBI Public Dissemination Policy"
+      mandatory_disclaimer: "Official macroeconomic and monetary data published by Reserve Bank of India."
+    discovery_protocol:
+      method: "STRUCTURED_SERIES_CATALOG"
+      category_filters: ["money_banking", "financial_markets", "national_accounts", "external_sector", "public_finance"]
+
+  - source_id: "in-sci-imd-climate"
+    name: "India Meteorological Department (IMD) / National Data Centre"
+    category: "meteorological_climate_earth_sciences"
+    priority: "Tier-1"
+    jurisdiction: "IN_CENTRAL"
+    governing_body: "Ministry of Earth Sciences (MoES)"
+    base_url: "https://mausam.imd.gov.in"
+    api_endpoint: "https://internal.imd.gov.in/api/"
+    access_method: "REST_API_AND_OPEN_GEO"
+    api_available: true
+    authentication_required: false
+    auth_type: "NONE"
+    search_supported: true
+    document_supported: true
+    supported_formats: ["JSON", "NetCDF", "GeoJSON", "PDF"]
+    rate_limit:
+      requests_per_minute: 20
+      burst_limit: 5
+      concurrency_ceiling: 2
+      retry_policy:
+        max_retries: 3
+        backoff_multiplier: 2.0
+        initial_interval_ms: 1000
+    provenance_requirements:
+      citation_format: "India Meteorological Department (IMD), Station/Subdivision: {station_name}, Report Date: {report_date_ist}"
+      attribution_url: "https://mausam.imd.gov.in"
+      licensing_terms: "Ministry of Earth Sciences Open Data Policy"
+      mandatory_disclaimer: "Weather and climate observation data provided by India Meteorological Department."
+    discovery_protocol:
+      method: "DISTRICT_WEATHER_REST"
+      geo_resolution: "DISTRICT_AND_SUBDIVISION"
+
+  - source_id: "in-spc-isro-bhuvan"
+    name: "ISRO Bhuvan — Indian Geo-Platform"
+    category: "geospatial_satellite_remote_sensing"
+    priority: "Tier-1"
+    jurisdiction: "IN_CENTRAL"
+    governing_body: "Indian Space Research Organisation (ISRO) / Department of Space"
+    base_url: "https://bhuvan.nrsc.gov.in"
+    api_endpoint: "https://bhuvan-app1.nrsc.gov.in/api/"
+    access_method: "OGC_WEB_SERVICES_REST"
+    api_available: true
+    authentication_required: true
+    auth_type: "BEARER_TOKEN"
+    auth_env_var: "ISRO_BHUVAN_API_TOKEN"
+    search_supported: true
+    document_supported: true
+    supported_formats: ["GeoJSON", "WMS", "WFS", "Shapefile", "GeoTIFF"]
+    rate_limit:
+      requests_per_minute: 60
+      burst_limit: 10
+      concurrency_ceiling: 3
+      retry_policy:
+        max_retries: 3
+        backoff_multiplier: 2.0
+        initial_interval_ms: 1000
+    provenance_requirements:
+      citation_format: "ISRO National Remote Sensing Centre (NRSC) Bhuvan Geo-Platform, Layer: {layer_name}, Sensor: {sensor_id}, Acquisition Date: {acquisition_date}"
+      attribution_url: "https://bhuvan.nrsc.gov.in"
+      licensing_terms: "National Geospatial Policy 2022 / ISRO NRSC Terms"
+      mandatory_disclaimer: "Geospatial data derived from ISRO Bhuvan satellite observations and national cadastral mappings."
+    discovery_protocol:
+      method: "OGC_CAPABILITIES_DISCOVERY"
+      coordinate_system: "EPSG:4326 (WGS 84)"
+
+  - source_id: "in-agr-icar-krishi"
+    name: "Indian Council of Agricultural Research (ICAR) — KRISHI Portal"
+    category: "agricultural_sciences_rural_economy"
+    priority: "Tier-1"
+    jurisdiction: "IN_CENTRAL"
+    governing_body: "Department of Agricultural Research and Education (DARE) / ICAR"
+    base_url: "https://krishi.icar.gov.in"
+    api_endpoint: "https://krishi.icar.gov.in/rest/"
+    access_method: "REST_AND_OAI_PMH"
+    api_available: true
+    authentication_required: false
+    auth_type: "NONE"
+    search_supported: true
+    document_supported: true
+    supported_formats: ["JSON", "PDF", "CSV"]
+    rate_limit:
+      requests_per_minute: 30
+      burst_limit: 5
+      concurrency_ceiling: 2
+      retry_policy:
+        max_retries: 3
+        backoff_multiplier: 2.0
+        initial_interval_ms: 1000
+    provenance_requirements:
+      citation_format: "ICAR Knowledge System for Agricultural Technologies (KRISHI), Dataset: {dataset_title}, Institute: {icar_institute}, Year: {year}"
+      attribution_url: "https://krishi.icar.gov.in"
+      licensing_terms: "ICAR Open Access Policy"
+      mandatory_disclaimer: "Agricultural technology and yield datasets published by ICAR Research Institutes."
+    discovery_protocol:
+      method: "OAI_PMH_AND_KEYWORD_SEARCH"
+
+  - source_id: "in-law-ipindia-patents"
+    name: "Controller General of Patents, Designs and Trade Marks (IP India)"
+    category: "intellectual_property_patents_trademarks"
+    priority: "Tier-1"
+    jurisdiction: "IN_CENTRAL"
+    governing_body: "DPIIT / Ministry of Commerce and Industry"
+    base_url: "https://ipindia.gov.in"
+    api_endpoint: "https://ipindiaservices.gov.in/publicsearch"
+    access_method: "STRUCTURED_QUERY_PORTAL"
+    api_available: true
+    authentication_required: false
+    auth_type: "NONE"
+    search_supported: true
+    document_supported: true
+    supported_formats: ["HTML", "PDF", "JSON"]
+    rate_limit:
+      requests_per_minute: 15
+      burst_limit: 3
+      concurrency_ceiling: 1
+      retry_policy:
+        max_retries: 3
+        backoff_multiplier: 3.0
+        initial_interval_ms: 2000
+    provenance_requirements:
+      citation_format: "Intellectual Property India (IP India), Patent/App No: {application_number}, Status: {status}, Filing Date: {filing_date}"
+      attribution_url: "https://ipindiaservices.gov.in"
+      licensing_terms: "Government of India Statutory Public Domain IP Records"
+      mandatory_disclaimer: "Patent and trademark status verified against the official Indian Patent Office registry."
+    discovery_protocol:
+      method: "INPASS_PUBLIC_INDEX_LOOKUP"
+
+  - source_id: "in-gov-pib-releases"
+    name: "Press Information Bureau (PIB India)"
+    category: "government_policy_cabinet_notifications"
+    priority: "Tier-1"
+    jurisdiction: "IN_CENTRAL"
+    governing_body: "Ministry of Information and Broadcasting"
+    base_url: "https://pib.gov.in"
+    api_endpoint: "https://pib.gov.in/RssMain.aspx"
+    access_method: "REST_API_AND_RSS"
+    api_available: true
+    authentication_required: false
+    auth_type: "NONE"
+    search_supported: true
+    document_supported: true
+    supported_formats: ["XML", "HTML", "JSON", "PDF"]
+    rate_limit:
+      requests_per_minute: 60
+      burst_limit: 10
+      concurrency_ceiling: 4
+      retry_policy:
+        max_retries: 3
+        backoff_multiplier: 2.0
+        initial_interval_ms: 1000
+    provenance_requirements:
+      citation_format: "Press Information Bureau (PIB), Government of India, Ministry: {ministry_name}, Release ID: {release_id}, Date: {release_date_ist}"
+      attribution_url: "https://pib.gov.in/PressReleasePage.aspx?PRID={release_id}"
+      licensing_terms: "Government of India Open Information Dissemination"
+      mandatory_disclaimer: "Official press communique of the Government of India."
+    discovery_protocol:
+      method: "MINISTRY_WISE_RSS_ARCHIVE_HARVESTING"
+
+  - source_id: "in-cor-mca21-registry"
+    name: "Ministry of Corporate Affairs (MCA21) Master Registry"
+    category: "corporate_registry_statutory_filings"
+    priority: "Tier-1"
+    jurisdiction: "IN_CENTRAL"
+    governing_body: "Ministry of Corporate Affairs (MCA)"
+    base_url: "https://www.mca.gov.in"
+    api_endpoint: "https://www.mca.gov.in/mcafoportal/companyMasterData.do"
+    access_method: "PUBLIC_QUERY_GATEWAY"
+    api_available: true
+    authentication_required: false
+    auth_type: "NONE"
+    search_supported: true
+    document_supported: true
+    supported_formats: ["HTML", "JSON", "PDF"]
+    rate_limit:
+      requests_per_minute: 20
+      burst_limit: 4
+      concurrency_ceiling: 2
+      retry_policy:
+        max_retries: 3
+        backoff_multiplier: 2.5
+        initial_interval_ms: 1500
+    provenance_requirements:
+      citation_format: "Ministry of Corporate Affairs (MCA21), Company: {company_name}, CIN: {cin}, RoC: {roc_code}, Status: {company_status}"
+      attribution_url: "https://www.mca.gov.in"
+      licensing_terms: "MCA Statutory Company Master Information"
+      mandatory_disclaimer: "Corporate status verified against Registrar of Companies (RoC) master registry."
+    discovery_protocol:
+      method: "CIN_AND_COMPANY_NAME_LOOKUP"
+
+  - source_id: "in-fin-sebi-bse-nse"
+    name: "SEBI & Capital Markets Disclosures (BSE / NSE India)"
+    category: "capital_markets_regulatory_disclosures"
+    priority: "Tier-1"
+    jurisdiction: "IN_CENTRAL"
+    governing_body: "Securities and Exchange Board of India (SEBI)"
+    base_url: "https://www.sebi.gov.in"
+    api_endpoint: "https://api.bseindia.com/BseIndiaAPI/api/"
+    access_method: "REST_API_AND_CORPORATE_ANNOUNCEMENT_FEEDS"
+    api_available: true
+    authentication_required: false
+    auth_type: "NONE"
+    search_supported: true
+    document_supported: true
+    supported_formats: ["JSON", "XML", "PDF"]
+    rate_limit:
+      requests_per_minute: 40
+      burst_limit: 8
+      concurrency_ceiling: 3
+      retry_policy:
+        max_retries: 3
+        backoff_multiplier: 2.0
+        initial_interval_ms: 1000
+    provenance_requirements:
+      citation_format: "SEBI / Exchange Disclosure, Entity: {entity_name}, Scrip/ISIN: {scrip_code}, Filing Category: {announcement_type}, Timestamp: {filing_timestamp_ist}"
+      attribution_url: "https://www.bseindia.com/xml-data/corpfiling/AttachLive/{attachment_pdf}"
+      licensing_terms: "SEBI (Listing Obligations and Disclosure Requirements) Regulations 2015"
+      mandatory_disclaimer: "Statutory market filing submitted to recognized Indian stock exchanges under SEBI LODR regulations."
+    discovery_protocol:
+      method: "EXCHANGE_ANNOUNCEMENT_STREAM"
+
+  - source_id: "in-sta-mospi-nsso"
+    name: "Ministry of Statistics and Programme Implementation (MOSPI) — Microdata & Surveys"
+    category: "national_statistics_surveys"
+    priority: "Tier-1"
+    jurisdiction: "IN_CENTRAL"
+    governing_body: "Ministry of Statistics and Programme Implementation (MOSPI) / National Statistical Office (NSO)"
+    base_url: "https://www.mospi.gov.in"
+    api_endpoint: "https://microdata.gov.in/nada43/index.php/api/"
+    access_method: "NADA_MICRODATA_CATALOG_REST"
+    api_available: true
+    authentication_required: true
+    auth_type: "API_KEY_HEADER"
+    auth_env_var: "MOSPI_NADA_API_KEY"
+    search_supported: true
+    document_supported: true
+    supported_formats: ["JSON", "CSV", "PDF", "SPSS", "STATA"]
+    rate_limit:
+      requests_per_minute: 30
+      burst_limit: 5
+      concurrency_ceiling: 2
+      retry_policy:
+        max_retries: 3
+        backoff_multiplier: 2.0
+        initial_interval_ms: 1000
+    provenance_requirements:
+      citation_format: "National Statistical Office (NSO), Survey: {survey_title} ({survey_round}), Variable: {variable_name}, Base Year: {base_year}"
+      attribution_url: "https://microdata.gov.in/nada43/index.php/catalog/{study_id}"
+      licensing_terms: "MOSPI National Data Archive (NADA) Dissemination Terms"
+      mandatory_disclaimer: "Sovereign statistical microdata compiled by National Statistical Office (NSO) of India."
+    discovery_protocol:
+      method: "NADA_METADATA_STUDY_DISCOVERY"
+
+  - source_id: "in-jud-ecourts-escr"
+    name: "National Judicial Data Grid (NJDG) & Digital Supreme Court Reports (e-SCR)"
+    category: "judicial_case_law_jurisprudence"
+    priority: "Tier-1"
+    jurisdiction: "IN_JUDICIARY"
+    governing_body: "Supreme Court of India / e-Committee Supreme Court"
+    base_url: "https://judgments.ecourts.gov.in"
+    api_endpoint: "https://escr.sci.gov.in/api/judgments"
+    access_method: "DIGITAL_SCR_REST_AND_PORTAL"
+    api_available: true
+    authentication_required: false
+    auth_type: "NONE"
+    search_supported: true
+    document_supported: true
+    supported_formats: ["JSON", "PDF", "HTML"]
+    rate_limit:
+      requests_per_minute: 25
+      burst_limit: 5
+      concurrency_ceiling: 2
+      retry_policy:
+        max_retries: 4
+        backoff_multiplier: 2.5
+        initial_interval_ms: 1500
+    provenance_requirements:
+      citation_format: "Supreme Court of India, Case: {case_title}, Neutral Citation: {neutral_citation}, Bench: {coram}, Judgment Date: {judgment_date}"
+      attribution_url: "https://escr.sci.gov.in/judgment/{judgment_id}"
+      licensing_terms: "Supreme Court of India Public Judicial Records"
+      mandatory_disclaimer: "Official judicial jurisprudence extracted from Supreme Court of India digital records."
+    discovery_protocol:
+      method: "NEUTRAL_CITATION_AND_STATUTE_SEARCH"
+
+  - source_id: "in-geo-mapmyindia-mappls"
+    name: "MapmyIndia (Mappls) Sovereign Geospatial Intelligence"
+    category: "geospatial_administrative_boundaries_logistics"
+    priority: "Tier-1"
+    jurisdiction: "IN_COMMERCIAL_SOVEREIGN"
+    governing_body: "CE Info Systems (MapmyIndia) / Empaneled Indian Geospatial Partner"
+    base_url: "https://about.mappls.com"
+    api_endpoint: "https://atlas.mappls.com/api/places/"
+    access_method: "REST_API_AND_MCP"
+    api_available: true
+    authentication_required: true
+    auth_type: "OAUTH2_BEARER"
+    auth_env_var: "MAPPLS_CLIENT_ID"
+    auth_secret_env_var: "MAPPLS_CLIENT_SECRET"
+    search_supported: true
+    document_supported: false
+    supported_formats: ["JSON", "GeoJSON"]
+    rate_limit:
+      requests_per_minute: 120
+      burst_limit: 20
+      concurrency_ceiling: 6
+      retry_policy:
+        max_retries: 3
+        backoff_multiplier: 1.5
+        initial_interval_ms: 500
+    provenance_requirements:
+      citation_format: "MapmyIndia (Mappls API), Spatial Entity: {place_name}, eLoc: {eloc}, Pin Code: {pincode}, Admin District: {district}"
+      attribution_url: "https://mappls.com/{eloc}"
+      licensing_terms: "MapmyIndia Commercial API License / National Geospatial Guidelines"
+      mandatory_disclaimer: "Location intelligence, administrative district hierarchies, and PIN code validations provided by MapmyIndia."
+    discovery_protocol:
+      method: "GEOCODING_AND_REVERSE_GEOCODING_REST"
+
+  # ----------------------------------------------------------------------------
+  # TIER 2: INDIAN ACADEMIC, SCIENTIFIC & INSTITUTIONAL REPOSITORIES
+  # ----------------------------------------------------------------------------
+
+  - source_id: "in-aca-inflibnet-shodhganga"
+    name: "INFLIBNET Centre — Shodhganga (Indian Theses & Dissertations)"
+    category: "academic_theses_research"
+    priority: "Tier-2"
+    jurisdiction: "IN_ACADEMIC"
+    governing_body: "Information and Library Network (INFLIBNET) Centre / UGC"
+    base_url: "https://shodhganga.inflibnet.ac.in"
+    api_endpoint: "https://shodhganga.inflibnet.ac.in/oai/request"
+    access_method: "OAI_PMH_AND_REST"
+    api_available: true
+    authentication_required: false
+    auth_type: "NONE"
+    search_supported: true
+    document_supported: true
+    supported_formats: ["XML", "PDF", "HTML"]
+    rate_limit:
+      requests_per_minute: 45
+      burst_limit: 8
+      concurrency_ceiling: 3
+      retry_policy:
+        max_retries: 3
+        backoff_multiplier: 2.0
+        initial_interval_ms: 1000
+    provenance_requirements:
+      citation_format: "Shodhganga (INFLIBNET), Researcher: {researcher_name}, Thesis: \"{thesis_title}\", University: {university_name}, Award Year: {year}, URI: {handle_url}"
+      attribution_url: "https://hdl.handle.net/{handle_id}"
+      licensing_terms: "UGC Open Access Mandate for Theses and Dissertations"
+      mandatory_disclaimer: "Doctoral research repository maintained by INFLIBNET Centre (UGC India)."
+    discovery_protocol:
+      method: "OAI_PMH_OAI_DC_HARVESTING"
+      verb: "ListRecords"
+      metadata_prefix: "oai_dc"
+
+  - source_id: "in-aca-ndli-mhrd"
+    name: "National Digital Library of India (NDLI)"
+    category: "national_digital_library"
+    priority: "Tier-2"
+    jurisdiction: "IN_ACADEMIC"
+    governing_body: "Ministry of Education / IIT Kharagpur"
+    base_url: "https://ndl.iitkgp.ac.in"
+    api_endpoint: "https://ndl.iitkgp.ac.in/api/search"
+    access_method: "REST_SEARCH_API"
+    api_available: true
+    authentication_required: true
+    auth_type: "API_KEY_HEADER"
+    auth_env_var: "NDLI_API_KEY"
+    search_supported: true
+    document_supported: true
+    supported_formats: ["JSON", "PDF", "EPUB"]
+    rate_limit:
+      requests_per_minute: 60
+      burst_limit: 10
+      concurrency_ceiling: 4
+      retry_policy:
+        max_retries: 3
+        backoff_multiplier: 2.0
+        initial_interval_ms: 1000
+    provenance_requirements:
+      citation_format: "National Digital Library of India (NDLI), Title: \"{resource_title}\", Contributor: {contributor_org}, NDLI Handle: {ndl_handle}"
+      attribution_url: "https://ndl.iitkgp.ac.in/result?handle={ndl_handle}"
+      licensing_terms: "National Mission on Education through ICT (NMEICT)"
+      mandatory_disclaimer: "Educational and research resource indexed by National Digital Library of India."
+    discovery_protocol:
+      method: "FACETED_CATALOG_SEARCH"
+
+  - source_id: "in-sci-niscpr-nopr"
+    name: "CSIR-NIScPR Online Periodicals Repository (NOPR)"
+    category: "peer_reviewed_scientific_journals"
+    priority: "Tier-2"
+    jurisdiction: "IN_RESEARCH"
+    governing_body: "National Institute of Science Communication and Policy Research (CSIR-NIScPR)"
+    base_url: "https://nopr.niscpr.res.in"
+    api_endpoint: "https://nopr.niscpr.res.in/oai/request"
+    access_method: "OAI_PMH_AND_DSPACE_REST"
+    api_available: true
+    authentication_required: false
+    auth_type: "NONE"
+    search_supported: true
+    document_supported: true
+    supported_formats: ["XML", "PDF", "HTML"]
+    rate_limit:
+      requests_per_minute: 30
+      burst_limit: 5
+      concurrency_ceiling: 2
+      retry_policy:
+        max_retries: 3
+        backoff_multiplier: 2.0
+        initial_interval_ms: 1000
+    provenance_requirements:
+      citation_format: "CSIR-NIScPR NOPR, Authors: {authors}, \"{article_title}\", Journal: {journal_name}, Vol. {volume}({issue}), pp. {pages}, Year: {year}"
+      attribution_url: "http://nopr.niscpr.res.in/handle/{handle_id}"
+      licensing_terms: "CSIR Open Access Journal Repository Policy"
+      mandatory_disclaimer: "Peer-reviewed scientific research published in CSIR-NIScPR national journals."
+    discovery_protocol:
+      method: "DSPACE_OAI_HARVESTING"
+
+  - source_id: "in-sci-ias-journals"
+    name: "Indian Academy of Sciences (IAS) Publications"
+    category: "scientific_academy_proceedings"
+    priority: "Tier-2"
+    jurisdiction: "IN_RESEARCH"
+    governing_body: "Indian Academy of Sciences (IAS Bangalore) / DST"
+    base_url: "https://www.ias.ac.in"
+    api_endpoint: "https://www.ias.ac.in/Journals/"
+    access_method: "REST_CROSSREF_AND_OAI"
+    api_available: true
+    authentication_required: false
+    auth_type: "NONE"
+    search_supported: true
+    document_supported: true
+    supported_formats: ["PDF", "HTML", "XML"]
+    rate_limit:
+      requests_per_minute: 40
+      burst_limit: 8
+      concurrency_ceiling: 3
+      retry_policy:
+        max_retries: 3
+        backoff_multiplier: 2.0
+        initial_interval_ms: 1000
+    provenance_requirements:
+      citation_format: "Indian Academy of Sciences, Authors: {authors}, \"{article_title}\", Journal: {journal_title}, DOI: {doi}, Year: {year}"
+      attribution_url: "https://doi.org/{doi}"
+      licensing_terms: "Creative Commons Attribution (CC-BY 4.0) Open Access"
+      mandatory_disclaimer: "Scientific article published by Indian Academy of Sciences."
+    discovery_protocol:
+      method: "CROSSREF_DOI_AND_IAS_INDEX"
+
+  - source_id: "in-med-icmr-repository"
+    name: "Indian Council of Medical Research (ICMR) e-Repository"
+    category: "biomedical_public_health_sciences"
+    priority: "Tier-2"
+    jurisdiction: "IN_RESEARCH"
+    governing_body: "Ministry of Health and Family Welfare (MoHFW) / ICMR"
+    base_url: "https://main.icmr.nic.in"
+    api_endpoint: "https://icmr.irins.org/oai"
+    access_method: "OAI_PMH_AND_REST"
+    api_available: true
+    authentication_required: false
+    auth_type: "NONE"
+    search_supported: true
+    document_supported: true
+    supported_formats: ["JSON", "PDF", "HTML"]
+    rate_limit:
+      requests_per_minute: 30
+      burst_limit: 5
+      concurrency_ceiling: 2
+      retry_policy:
+        max_retries: 3
+        backoff_multiplier: 2.0
+        initial_interval_ms: 1000
+    provenance_requirements:
+      citation_format: "Indian Council of Medical Research (ICMR), Study: \"{study_title}\", Institute: {icmr_institute}, Technical Report / IJMR Publication, Year: {year}"
+      attribution_url: "https://main.icmr.nic.in"
+      licensing_terms: "ICMR Biomedical Research Public Dissemination Policy"
+      mandatory_disclaimer: "Medical and epidemiological research data from ICMR National Institute network."
+    discovery_protocol:
+      method: "IRINS_RESEARCH_PORTAL_HARVESTING"
+
+  - source_id: "in-aca-iisc-eprints"
+    name: "Indian Institute of Science (IISc) ePrints Repository"
+    category: "institutional_academic_repository"
+    priority: "Tier-2"
+    jurisdiction: "IN_ACADEMIC"
+    governing_body: "Indian Institute of Science (IISc Bangalore)"
+    base_url: "https://eprints.iisc.ac.in"
+    api_endpoint: "https://eprints.iisc.ac.in/cgi/oai2"
+    access_method: "OAI_PMH_2_0"
+    api_available: true
+    authentication_required: false
+    auth_type: "NONE"
+    search_supported: true
+    document_supported: true
+    supported_formats: ["XML", "PDF"]
+    rate_limit:
+      requests_per_minute: 30
+      burst_limit: 5
+      concurrency_ceiling: 2
+      retry_policy:
+        max_retries: 3
+        backoff_multiplier: 2.0
+        initial_interval_ms: 1000
+    provenance_requirements:
+      citation_format: "IISc ePrints Repository, Authors: {authors}, \"{title}\", Department: {department}, Year: {year}, URI: {eprints_uri}"
+      attribution_url: "https://eprints.iisc.ac.in/{eprint_id}"
+      licensing_terms: "IISc Institutional Open Access Repository Policy"
+      mandatory_disclaimer: "Institutional scholarly repository of Indian Institute of Science, Bangalore."
+    discovery_protocol:
+      method: "EPRINTS_OAI_PMH"
+
+  # ----------------------------------------------------------------------------
+  # TIER 3: GLOBAL SCHOLARLY, BIBLIOGRAPHIC & SCIENTIFIC INDICES
+  # ----------------------------------------------------------------------------
+
+  - source_id: "glb-sch-openalex"
+    name: "OpenAlex — Global Scholarly Knowledge Graph"
+    category: "scholarly_bibliometrics_knowledge_graph"
+    priority: "Tier-3"
+    jurisdiction: "GLOBAL"
+    governing_body: "OurResearch (Non-profit)"
+    base_url: "https://openalex.org"
+    api_endpoint: "https://api.openalex.org/works"
+    access_method: "REST_API"
+    api_available: true
+    authentication_required: false
+    auth_type: "POLITE_POOL_MAILTO_HEADER"
+    auth_env_var: "OPENALEX_POLITE_EMAIL"
+    search_supported: true
+    document_supported: true
+    supported_formats: ["JSON"]
+    rate_limit:
+      requests_per_minute: 600
+      burst_limit: 50
+      concurrency_ceiling: 10
+      retry_policy:
+        max_retries: 3
+        backoff_multiplier: 1.5
+        initial_interval_ms: 500
+    provenance_requirements:
+      citation_format: "OpenAlex Knowledge Graph, Work ID: {openalex_id}, Authors: {authors_string}, Title: \"{title}\", Venue: {venue_name}, DOI: {doi}"
+      attribution_url: "https://openalex.org/{openalex_id}"
+      licensing_terms: "Creative Commons CC0 1.0 Universal Public Domain Dedication"
+      mandatory_disclaimer: "Scholarly citation metadata derived from OpenAlex open knowledge graph."
+    discovery_protocol:
+      method: "REST_FILTERED_SEARCH"
+      filters_supported: ["institutions.country_code:IN", "publication_year", "concepts.id", "open_access.is_oa"]
+
+  - source_id: "glb-sch-crossref"
+    name: "Crossref Metadata Registry"
+    category: "scholarly_doi_metadata"
+    priority: "Tier-3"
+    jurisdiction: "GLOBAL"
+    governing_body: "Publishers International Linking Association (Crossref)"
+    base_url: "https://www.crossref.org"
+    api_endpoint: "https://api.crossref.org/works"
+    access_method: "REST_API"
+    api_available: true
+    authentication_required: false
+    auth_type: "POLITE_POOL_MAILTO_HEADER"
+    auth_env_var: "CROSSREF_POLITE_EMAIL"
+    search_supported: true
+    document_supported: false
+    supported_formats: ["JSON", "XML"]
+    rate_limit:
+      requests_per_minute: 300
+      burst_limit: 25
+      concurrency_ceiling: 5
+      retry_policy:
+        max_retries: 3
+        backoff_multiplier: 1.5
+        initial_interval_ms: 500
+    provenance_requirements:
+      citation_format: "Crossref Metadata, DOI: {doi}, Publisher: {publisher}, Title: \"{title}\", Year: {published_year}"
+      attribution_url: "https://doi.org/{doi}"
+      licensing_terms: "Crossref Free Public Metadata Service Terms"
+      mandatory_disclaimer: "Academic publication metadata registered with Crossref."
+    discovery_protocol:
+      method: "DOI_AND_BIBLIOGRAPHIC_QUERY"
+
+  - source_id: "glb-sch-semantic-scholar"
+    name: "Semantic Scholar (S2AG) API"
+    category: "ai_driven_scholarly_search"
+    priority: "Tier-3"
+    jurisdiction: "GLOBAL"
+    governing_body: "Allen Institute for AI (AI2)"
+    base_url: "https://www.semanticscholar.org"
+    api_endpoint: "https://api.semanticscholar.org/graph/v1/paper/search"
+    access_method: "REST_API"
+    api_available: true
+    authentication_required: true
+    auth_type: "API_KEY_HEADER"
+    auth_env_var: "SEMANTIC_SCHOLAR_API_KEY"
+    search_supported: true
+    document_supported: true
+    supported_formats: ["JSON"]
+    rate_limit:
+      requests_per_minute: 100
+      burst_limit: 15
+      concurrency_ceiling: 4
+      retry_policy:
+        max_retries: 3
+        backoff_multiplier: 2.0
+        initial_interval_ms: 1000
+    provenance_requirements:
+      citation_format: "Semantic Scholar (AI2), CorpusID: {corpus_id}, Authors: {authors}, \"{title}\", Influential Citations: {influential_citation_count}"
+      attribution_url: "https://www.semanticscholar.org/paper/{paper_id}"
+      licensing_terms: "Semantic Scholar API Terms of Service"
+      mandatory_disclaimer: "Citation analysis and semantic summaries provided by Allen Institute for AI."
+    discovery_protocol:
+      method: "SEMANTIC_GRAPH_SEARCH"
+
+  - source_id: "glb-sci-arxiv"
+    name: "arXiv Scientific Pre-print Repository"
+    category: "open_access_preprints"
+    priority: "Tier-3"
+    jurisdiction: "GLOBAL"
+    governing_body: "Cornell University / arXiv.org"
+    base_url: "https://arxiv.org"
+    api_endpoint: "http://export.arxiv.org/api/query"
+    access_method: "REST_AND_OAI_PMH"
+    api_available: true
+    authentication_required: false
+    auth_type: "NONE"
+    search_supported: true
+    document_supported: true
+    supported_formats: ["XML", "PDF", "LaTeX"]
+    rate_limit:
+      requests_per_minute: 20
+      burst_limit: 1
+      concurrency_ceiling: 1
+      strict_delay_between_requests_ms: 3000
+      retry_policy:
+        max_retries: 4
+        backoff_multiplier: 2.0
+        initial_interval_ms: 3000
+    provenance_requirements:
+      citation_format: "arXiv Pre-print Server, Identifier: {arxiv_id} [{primary_category}], Title: \"{title}\", Authors: {authors}, Submitted: {submitted_date}"
+      attribution_url: "https://arxiv.org/abs/{arxiv_id}"
+      licensing_terms: "arXiv License Framework (arXiv.org non-exclusive distribution / CC-BY / CC-BY-SA)"
+      mandatory_disclaimer: "Non-peer-reviewed scientific preprint indexed on arXiv.org."
+    discovery_protocol:
+      method: "ARXIV_API_FIELD_QUERY"
+
+  - source_id: "glb-med-pubmed-ncbi"
+    name: "PubMed / NCBI Entrez Biomedical Database"
+    category: "biomedical_life_sciences_literature"
+    priority: "Tier-3"
+    jurisdiction: "GLOBAL"
+    governing_body: "National Center for Biotechnology Information (NCBI) / US NLM"
+    base_url: "https://pubmed.ncbi.nlm.nih.gov"
+    api_endpoint: "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/"
+    access_method: "E_UTILITIES_REST_API"
+    api_available: true
+    authentication_required: true
+    auth_type: "API_KEY_QUERY_PARAM"
+    auth_env_var: "NCBI_PUBMED_API_KEY"
+    search_supported: true
+    document_supported: true
+    supported_formats: ["XML", "JSON", "PDF"]
+    rate_limit:
+      requests_per_minute: 180
+      burst_limit: 20
+      concurrency_ceiling: 5
+      retry_policy:
+        max_retries: 3
+        backoff_multiplier: 1.5
+        initial_interval_ms: 500
+    provenance_requirements:
+      citation_format: "PubMed (NCBI), PMID: {pmid}, PMCID: {pmcid}, Title: \"{title}\", Journal: {journal_abbrev}, Year: {pub_year}"
+      attribution_url: "https://pubmed.ncbi.nlm.nih.gov/{pmid}/"
+      licensing_terms: "NLM/NCBI E-utilities Terms of Use"
+      mandatory_disclaimer: "Biomedical literature indexed by National Library of Medicine (PubMed)."
+    discovery_protocol:
+      method: "EUTILS_ESEARCH_AND_ESUMMARY"
+
+  # ----------------------------------------------------------------------------
+  # TIER 4: GENERAL WEB & FALLBACK DISCOVERY LAYER
+  # ----------------------------------------------------------------------------
+
+  - source_id: "glb-web-tavily-search"
+    name: "Tavily Search Engine for AI"
+    category: "ai_optimized_web_search"
+    priority: "Tier-4"
+    jurisdiction: "GLOBAL"
+    governing_body: "Tavily AI"
+    base_url: "https://tavily.com"
+    api_endpoint: "https://api.tavily.com/search"
+    access_method: "REST_API"
+    api_available: true
+    authentication_required: true
+    auth_type: "API_KEY_JSON_BODY"
+    auth_env_var: "TAVILY_API_KEY"
+    search_supported: true
+    document_supported: true
+    supported_formats: ["JSON"]
+    rate_limit:
+      requests_per_minute: 100
+      burst_limit: 15
+      concurrency_ceiling: 4
+      retry_policy:
+        max_retries: 3
+        backoff_multiplier: 2.0
+        initial_interval_ms: 1000
+    provenance_requirements:
+      citation_format: "Web Intelligence (via Tavily Search), Title: \"{title}\", Domain: {domain}, URL: {url}, Extracted: {timestamp_ist}"
+      attribution_url: "{url}"
+      licensing_terms: "Tavily API Terms of Service"
+      mandatory_disclaimer: "Web-indexed content retrieved via Tavily search aggregation."
+    discovery_protocol:
+      method: "REALTIME_SEARCH_API"
+
+  - source_id: "glb-web-google-serpapi"
+    name: "Google India Search (via SerpAPI)"
+    category: "localized_general_search"
+    priority: "Tier-4"
+    jurisdiction: "IN_LOCALIZED_GLOBAL"
+    governing_body: "SerpAPI / Google Search (Region: India, gl=in, cr=countryIN)"
+    base_url: "https://serpapi.com"
+    api_endpoint: "https://serpapi.com/search"
+    access_method: "REST_API"
+    api_available: true
+    authentication_required: true
+    auth_type: "API_KEY_QUERY_PARAM"
+    auth_env_var: "SERPAPI_KEY"
+    search_supported: true
+    document_supported: false
+    supported_formats: ["JSON"]
+    rate_limit:
+      requests_per_minute: 60
+      burst_limit: 10
+      concurrency_ceiling: 3
+      retry_policy:
+        max_retries: 3
+        backoff_multiplier: 2.0
+        initial_interval_ms: 1000
+    provenance_requirements:
+      citation_format: "Google India Search (via SerpAPI), Rank: #{position}, Title: \"{title}\", URL: {link}, Snapshot: {timestamp_ist}"
+      attribution_url: "{link}"
+      licensing_terms: "SerpAPI Terms of Service"
+      mandatory_disclaimer: "Organic localized search results for Indian query geography."
+    discovery_protocol:
+      method: "SERP_LOCALIZED_QUERY"
+      default_geo_params:
+        gl: "in"
+        hl: "en"
+        google_domain: "google.co.in"
+
+  - source_id: "glb-web-jina-reader"
+    name: "Jina AI Deep Reader (Clean Markdown Extractor)"
+    category: "markdown_web_scraper"
+    priority: "Tier-4"
+    jurisdiction: "GLOBAL"
+    governing_body: "Jina AI"
+    base_url: "https://jina.ai/reader"
+    api_endpoint: "https://r.jina.ai/"
+    access_method: "REST_PROXIED_GET"
+    api_available: true
+    authentication_required: false
+    auth_type: "BEARER_OPTIONAL"
+    auth_env_var: "JINA_API_KEY"
+    search_supported: false
+    document_supported: true
+    supported_formats: ["Markdown", "JSON"]
+    rate_limit:
+      requests_per_minute: 120
+      burst_limit: 20
+      concurrency_ceiling: 5
+      retry_policy:
+        max_retries: 3
+        backoff_multiplier: 1.5
+        initial_interval_ms: 500
+    provenance_requirements:
+      citation_format: "Clean Markdown Snapshot (via Jina Reader), Canonical Source: {target_url}, SHA256: {content_hash}, Captured: {timestamp_ist}"
+      attribution_url: "{target_url}"
+      licensing_terms: "Jina Reader Terms of Service"
+      mandatory_disclaimer: "Extracted full-text markdown representation of publicly accessible webpage."
+    discovery_protocol:
+      method: "DIRECT_URL_STREAMING_READ"
+
+# ==============================================================================
+# ROUTING & FALLBACK POLICIES (FIRST-PRINCIPLES FAILSAFE MATRIX)
+# ==============================================================================
+orchestration_rules:
+  priority_order:
+    - "Tier-1" # Always query sovereign government sources first for statutory, economic, or policy metrics
+    - "Tier-2" # Query national scholarly repositories for academic depth and technical studies
+    - "Tier-3" # Query international bibliographic indices for global benchmarks and comparative literature
+    - "Tier-4" # Query general web only for real-time breaking events or missing tail topics
+
+  conflict_resolution_precedence:
+    rule: "Higher tier strictly overrides lower tier on factual/numerical disputes unless explicitly qualified by date."
+    tier_hierarchy:
+      Tier-1: 4 # Maximum authority (Acts, Gazettes, Central Bank Series, Supreme Court Decisions)
+      Tier-2: 3 # High authority (Peer-reviewed Indian Academy / CSIR / INFLIBNET)
+      Tier-3: 2 # Moderate authority (Global scholarly pre-prints and indices)
+      Tier-4: 1 # Baseline authority (News, blogs, web pages)
+
+  failover_behavior:
+    on_tier_1_unavailable: "Log structured alert; record epistemic uncertainty flag; attempt cached snapshot; fallback to Tier-2 with explicit disclaimer."
+    on_rate_limit_exceeded: "Queue request with exponential backoff and jitter; never violate upstream provider limits."
+    on_authentication_missing: "Bypass authenticated endpoints gracefully; execute open catalog discovery only."
